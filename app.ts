@@ -7,6 +7,19 @@ import * as logger from "morgan";
 import * as path from "path";
 import * as favicon from "serve-favicon";
 
+import {Sequelize} from "sequelize-typescript";
+
+const sequelize =  new Sequelize({
+	name: "monstergame_db",
+	dialect: "sqlite",
+	username: "root",
+	password: "",
+	storage: "monstergame.db",
+	modelPaths: [__dirname + "/models"]
+});
+
+sequelize.sync();
+
 var app = express();
 
 // view engine setup

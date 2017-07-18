@@ -12,7 +12,10 @@
         "only-arrow-functions": false,
         "no-var-requires": false,
         "prefer-const": false,
-        "no-var-keyword": false
+        "no-var-keyword": false,
+        "object-literal-sort-keys": false,
+        "trailing-comma": false,
+        "ordered-imports": false
     },
     "rulesDirectory": []
 }
