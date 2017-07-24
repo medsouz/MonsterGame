@@ -6,8 +6,8 @@ export default class UserGrid extends Model<UserGrid> {
 	public UserGridID: number;
 	@Column
 	public UserID: number;
-  @Column
-  public SizeX: number;
-  @Column
-  public SizeY: number;
+	@Column
+	public SizeX: number;
+	@Column
+	public SizeY: number;
 }

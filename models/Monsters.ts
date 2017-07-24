@@ -4,6 +4,6 @@ import {Table, Column, Model, HasMany} from "sequelize-typescript";
 export default class Monsters extends Model<Monsters> {
 	@Column
 	public MonsterID: number;
-  @Column
-  public MonsterDefaultName: string;
+	@Column
+	public MonsterDefaultName: string;
 }

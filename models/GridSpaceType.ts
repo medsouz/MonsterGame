@@ -4,9 +4,9 @@ import {Table, Column, Model, HasMany} from "sequelize-typescript";
 export default class GridSpaceType extends Model<GridSpaceType> {
 	@Column
 	public GridSpaceTypeID: number;
-  @Column
-  public GridSpaceTypeEffectID: number;
-  @Column
-  public GridSpaceTypeDescription: string;
+	@Column
+	public GridSpaceTypeEffectID: number;
+	@Column
+	public GridSpaceTypeDescription: string;
 
 }

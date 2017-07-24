@@ -4,8 +4,8 @@ import {Table, Column, Model, HasMany} from "sequelize-typescript";
 export default class ItemEffectsList extends Model<ItemEffectsList> {
 	@Column
 	public ItemEffectsListID: number;
-  @Column
-  public ItemID: number;
-  @Column
-  public ItemEffectID: number;
+	@Column
+	public ItemID: number;
+	@Column
+	public ItemEffectID: number;
 }
