@@ -6,4 +6,12 @@ export default class TestModel extends Model<TestModel> {
 	public name: string;
 	@Column
 	public birthday: Date;
+
+	constructor() {
+		super();
+	}
+
+	public stub() {
+		return null;
+	}
 }

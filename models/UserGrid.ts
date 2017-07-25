@@ -10,4 +10,5 @@ export default class UserGrid extends Model<UserGrid> {
 	public SizeX: number;
 	@Column
 	public SizeY: number;
+
 }
