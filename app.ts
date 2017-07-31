@@ -14,7 +14,7 @@ const sequelize =  new Sequelize({
 	dialect: "sqlite",
 	username: "root",
 	password: "",
-	storage: "monstergame.db",
+	storage: __dirname + "monstergame.db",
 	modelPaths: [__dirname + "/models"]
 });
 
@@ -25,6 +25,7 @@ var app = express();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+app.use(require("express-ejs-layouts"));
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
