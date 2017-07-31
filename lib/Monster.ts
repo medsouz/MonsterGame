@@ -1,4 +1,5 @@
 export default class Monster {
+
 	private UserMonsterID: number;
 	private UserMonsterName: string;
 	private MonsterDefaultName: string;
