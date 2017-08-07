@@ -65,3 +65,6 @@ typings/
 
 # Ignore database
 *.db
+
+# Jetbrains IDE files
+.idea/
