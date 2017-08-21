@@ -1,8 +1,8 @@
 import {Table, Column, Model, HasMany} from "sequelize-typescript";
 
 @Table
-export default class Users extends Model<Users> {
-	@Column
+export class User extends Model<User> {
+	@Column({primaryKey: true})
 	public UserID: number;
 	@Column
 	public UserName: string;
