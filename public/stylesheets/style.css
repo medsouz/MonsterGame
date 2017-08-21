@@ -348,3 +348,17 @@ html{
 .botHeight{
   height:20%;
 }
+
+.loginBox{
+  width:30%;
+  height:27%;
+  margin-top: 15%;
+  background-color: lightblue;
+}
+
+.signupBox{
+  width:30%;
+  height:35%;
+  margin-top: 15%;
+  background-color: lightblue;
+}
