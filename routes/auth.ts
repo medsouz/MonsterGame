@@ -46,7 +46,7 @@ passport.use(new LocalStrategy(
 
 /* GET login page. */
 router.get("/login", function(req, res, next) {
-	res.render("auth/login", { title: "Login" });
+	res.render("auth/login", { messages: req.flash("error") });
 });
 
 /* POST login page. */
@@ -54,7 +54,7 @@ router.post("/login", passport.authenticate("local", { successRedirect: "/", fai
 
 /* GET register page. */
 router.get("/register", function(req, res, next) {
-	res.render("auth/register", { title: "Register" });
+	res.render("auth/register", { messages: req.flash("error") });
 });
 
 /* POST register page. */

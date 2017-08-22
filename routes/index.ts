@@ -4,19 +4,59 @@ var router = Router();
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
-	let theInventory = [
+	let theMonsters = [
 		{
-			gridSpace: 5,
-			userGrid: 3,
-			locationY: 1,
-			locationX: 1,
-			userMonster: 135,
-			gridSpaceType: 3
+			MonsterID: 1,
+			MonsterDefaultName: "chris"
+		},
+		{
+			MonsterID: 2,
+			MonsterDefaultName: "matt"
+		},
+		{
+			MonsterID: 3,
+			MonsterDefaultName: "hazard"
+		},
+		{
+			MonsterID: 4,
+			MonsterDefaultName: "aoeaoe"
+		},
+		{
+			MonsterID: 1,
+			MonsterDefaultName: "chris"
+		},
+		{
+			MonsterID: 2,
+			MonsterDefaultName: "matt"
+		},
+		{
+			MonsterID: 3,
+			MonsterDefaultName: "hazard"
+		},
+		{
+			MonsterID: 4,
+			MonsterDefaultName: "aoeaoe"
+		},
+		{
+			MonsterID: 1,
+			MonsterDefaultName: "chris"
+		},
+		{
+			MonsterID: 2,
+			MonsterDefaultName: "matt"
+		},
+		{
+			MonsterID: 3,
+			MonsterDefaultName: "hazard"
+		},
+		{
+			MonsterID: 4,
+			MonsterDefaultName: "aoeaoe"
 		}
 	];
 
 	if ( req.user != null ) {
-		res.render("index", { user : req.user, inventory: theInventory });
+		res.render("index", { user : req.user, monsters: theMonsters, messages: req.flash });
 	} else { res.redirect("auth/login"); }
 });
 
