@@ -4,10 +4,6 @@ var router = Router();
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
-	let theUser = {
-		username: "chris",
-		coins: 100
-	};
 	let theInventory = [
 		{
 			gridSpace: 5,
@@ -19,9 +15,8 @@ router.get("/", function(req, res, next) {
 		}
 	];
 
-	if ( theUser !== req.user) {
-
-		res.render("index", { user : theUser, inventory: theInventory });
+	if ( req.user != null ) {
+		res.render("index", { user : req.user, inventory: theInventory });
 	} else { res.redirect("auth/login"); }
 });
 
