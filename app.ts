@@ -16,6 +16,12 @@ import * as logger from "morgan";
 // file system paths - standard node library
 import * as path from "path";
 
+import * as session from "express-session";
+
+import flash = require("connect-flash");
+
+import * as passport from "passport";
+
 // sql object relation mapping:
 // lets us make object models that link directly to the database
 // and generates the database tables off of the objects created.
@@ -54,16 +60,18 @@ app.use(cookieParser());
 // if a file is in the public folder ont he server, serves the file
 // instead of using page routing
 app.use(express.static(path.join(__dirname, "public")));
-
-// test command to log full contents of req object to server log
-// TODO: delete me
-app.use(function(req, res, next) {
-	console.log (req);
-	next();
-});
+app.use(session({
+	resave: false,
+	saveUninitialized: false,
+	secret: "totally secure text string. no session hijacking here. nope. no way."
+}));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // includes routing files to better organize page routing
 app.use("/", require("./routes/index"));
+app.use("/auth", require("./routes/auth"));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

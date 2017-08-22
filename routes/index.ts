@@ -8,7 +8,7 @@ router.get("/", function(req, res, next) {
 		username: "chris",
 		coins: 100
 	};
-
+	console.log(req.user);
 	let theInventory = [
 		{
 			gridSpace: 5,
@@ -20,19 +20,10 @@ router.get("/", function(req, res, next) {
 		}
 	];
 
-	if ( theUser != null) {
+	if ( theUser !== req.user) {
+
 		res.render("index", { user : theUser, inventory: theInventory });
-	} else { res.redirect("login"); }
-});
-
-// login page
-router.get("/login", function(req, res, next) {
-	res.render("login");
-});
-
-// sign up page
-router.get("/signup", function(req, res, next) {
-	res.render("signup");
+	} else { res.redirect("auth/login"); }
 });
 
 module.exports = router;
