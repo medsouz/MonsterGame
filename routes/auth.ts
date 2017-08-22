@@ -80,7 +80,7 @@ router.post("/register", function(req, res, next) {
 		});
 	} else {
 		req.flash("error", "Invalid username or password");
-		res.redirect("/");
+		res.redirect("/auth/register");
 	}
 });
 

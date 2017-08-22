@@ -8,7 +8,6 @@ router.get("/", function(req, res, next) {
 		username: "chris",
 		coins: 100
 	};
-	console.log(req.user);
 	let theInventory = [
 		{
 			gridSpace: 5,

@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74cb2a85-b274-4be2-8983-3d183b352d4f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/auth.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/auth/login.ejs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/auth/register.ejs" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/views/login.ejs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/views/signup.ejs" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/models/Users.ts" afterPath="$PROJECT_DIR$/models/User.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.ts" afterPath="$PROJECT_DIR$/app.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/auth.ts" afterPath="$PROJECT_DIR$/routes/auth.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.ts" afterPath="$PROJECT_DIR$/routes/index.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tsconfig.json" afterPath="$PROJECT_DIR$/tsconfig.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tslint.json" afterPath="$PROJECT_DIR$/tslint.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.ejs" afterPath="$PROJECT_DIR$/views/index.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/auth/register.ejs" afterPath="$PROJECT_DIR$/views/auth/register.ejs" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -49,8 +39,8 @@
       <file leaf-file-name="register.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/auth/register.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="66" lean-forward="false" selection-start-line="22" selection-start-column="66" selection-end-line="22" selection-end-column="66" />
+            <state relative-caret-position="289">
+              <caret line="17" column="42" lean-forward="false" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -69,8 +59,8 @@
       <file leaf-file-name="auth.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/auth.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="30" column="36" lean-forward="true" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
+            <state relative-caret-position="766">
+              <caret line="82" column="36" lean-forward="false" selection-start-line="82" selection-start-column="36" selection-end-line="82" selection-end-column="36" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -131,9 +121,9 @@
         <option value="$PROJECT_DIR$/views/login.ejs" />
         <option value="$PROJECT_DIR$/views/index.ejs" />
         <option value="$PROJECT_DIR$/views/auth/login.ejs" />
-        <option value="$PROJECT_DIR$/views/auth/register.ejs" />
-        <option value="$PROJECT_DIR$/routes/index.ts" />
         <option value="$PROJECT_DIR$/app.ts" />
+        <option value="$PROJECT_DIR$/routes/index.ts" />
+        <option value="$PROJECT_DIR$/views/auth/register.ejs" />
         <option value="$PROJECT_DIR$/routes/auth.ts" />
       </list>
     </option>
@@ -686,12 +676,12 @@
       <workItem from="1502149599853" duration="1246000" />
       <workItem from="1503264005045" duration="27000" />
       <workItem from="1503264090262" duration="619000" />
-      <workItem from="1503352340514" duration="7818000" />
+      <workItem from="1503352340514" duration="8141000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9710000" />
+    <option name="totallyTimeSpent" value="10033000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="48" y="0" width="1875" height="1083" extended-state="6" />
@@ -850,22 +840,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/auth/register.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="66" lean-forward="false" selection-start-line="22" selection-start-column="66" selection-end-line="22" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-10">
@@ -882,10 +856,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/auth/register.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="42" lean-forward="false" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes/auth.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="30" column="36" lean-forward="true" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
+        <state relative-caret-position="766">
+          <caret line="82" column="36" lean-forward="false" selection-start-line="82" selection-start-column="36" selection-end-line="82" selection-end-column="36" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
