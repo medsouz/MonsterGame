@@ -52,6 +52,12 @@ router.get("/login", function(req, res, next) {
 /* POST login page. */
 router.post("/login", passport.authenticate("local", { successRedirect: "/", failureRedirect: "/auth/login", failureFlash: true }));
 
+/* GET logout page. */
+router.get("/logout", function(req, res, next) {
+	req.logout();
+	res.redirect("/");
+});
+
 /* GET register page. */
 router.get("/register", function(req, res, next) {
 	res.render("auth/register", { messages: req.flash("error") });
