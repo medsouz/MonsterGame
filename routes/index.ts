@@ -4,59 +4,66 @@ var router = Router();
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
+
+	function getRandomInt(min: number, max: number) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		return Math.floor(Math.random() * (max - min)) + min; // The maximum is exclusive and the minimum is inclusive
+	}
+
 	let theMonsters = [
 		{
-			MonsterID: 1,
+			MonsterID: getRandomInt(0, 3),
 			MonsterDefaultName: "chris"
 		},
 		{
-			MonsterID: 2,
+			MonsterID: getRandomInt(0, 3),
 			MonsterDefaultName: "matt"
 		},
 		{
-			MonsterID: 3,
+			MonsterID: getRandomInt(0, 3),
 			MonsterDefaultName: "hazard"
 		},
 		{
-			MonsterID: 4,
+			MonsterID: getRandomInt(0, 3),
 			MonsterDefaultName: "aoeaoe"
 		},
 		{
-			MonsterID: 1,
+			MonsterID: getRandomInt(0, 3),
 			MonsterDefaultName: "chris"
 		},
 		{
-			MonsterID: 2,
+			MonsterID: getRandomInt(0, 3),
 			MonsterDefaultName: "matt"
 		},
 		{
-			MonsterID: 3,
+			MonsterID: getRandomInt(0, 3),
 			MonsterDefaultName: "hazard"
 		},
 		{
-			MonsterID: 4,
+			MonsterID: getRandomInt(0, 3),
 			MonsterDefaultName: "aoeaoe"
 		},
 		{
-			MonsterID: 1,
+			MonsterID: getRandomInt(0, 3),
 			MonsterDefaultName: "chris"
 		},
 		{
-			MonsterID: 2,
+			MonsterID: getRandomInt(0, 3),
 			MonsterDefaultName: "matt"
 		},
 		{
-			MonsterID: 3,
+			MonsterID: getRandomInt(0, 3),
 			MonsterDefaultName: "hazard"
 		},
 		{
-			MonsterID: 4,
+			MonsterID: getRandomInt(0, 3),
 			MonsterDefaultName: "aoeaoe"
 		}
 	];
 
 	if ( req.user != null ) {
-		res.render("index", { user : req.user, monsters: theMonsters, messages: req.flash });
+		res.render("index", { user : req.user, monsters: theMonsters, messages: req.flash("error") });
 	} else { res.redirect("auth/login"); }
 });
 

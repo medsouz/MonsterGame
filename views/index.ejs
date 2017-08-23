@@ -43,7 +43,7 @@
                     <% for(var i=0; i < monsters.length; i++) {%>
 
                         <div class="col-sm-3 noPadding">
-                            <div class="yellow box"></div>
+                            <div class="yellow box"><%= monsters[i].MonsterDefaultName %> | <%= monsters[i].MonsterID %><img src="/img/monster/<%= monsters[i].MonsterID %>.png" style="float: right; height: 100%"/></div>
                         </div>
 
                     <% } %>
