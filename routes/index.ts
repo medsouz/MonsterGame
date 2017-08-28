@@ -1,6 +1,6 @@
 // takes that we need from the express library and imports into this page
 import {Router} from "express";
-var router = Router();
+let router = Router();
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
