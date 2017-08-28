@@ -12,13 +12,23 @@ router.get("/", function(req, res, next) {
 		max = Math.floor(max);
 		return Math.floor(Math.random() * (max - min)) + min; // The maximum is exclusive and the minimum is inclusive
 	}
-
 	// create monster game object
 	// call monster game object function to load a grid with monsters,
 	// and a list of items for the logged in user.
 
 	// then call monster game function to output array for theMonsters
 	// then call monster game function to output array for items.
+
+	if ( req.user != null ) {
+		res.render("index", { user : req.user, messages: req.flash("error")});
+	} else { res.redirect("auth/login"); }
+});
+
+router.get("/showMonster", function(req, res, next) {
+	res.render("monster");
+});
+
+router.get("/gameGrid", function(req, res, next) {
 
 	let theMonsters: GridSpace[] = [
 		new GridSpace(),
@@ -47,9 +57,7 @@ router.get("/", function(req, res, next) {
 	theMonsters[10].setMonster(new Monster("oeuoeuoe", "3A"));
 	theMonsters[11].setMonster(new Monster("fctgcgft", "7C"));
 
-	if ( req.user != null ) {
-		res.render("index", { user : req.user, monsters: theMonsters, messages: req.flash("error") });
-	} else { res.redirect("auth/login"); }
+	res.render("gameGrid", { monsters: theMonsters });
 });
 
 module.exports = router;
