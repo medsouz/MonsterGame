@@ -12,11 +12,11 @@ export default class GridSpace {
 	}
 
 	public getMonster() {
-		return null;
+		return this.Monster;
 	}
 
-	public setMonster() {
-		return null;
+	public setMonster(monster: Monster) {
+		this.Monster = monster;
 	}
 
 	public getGridSpaceTypes() {
