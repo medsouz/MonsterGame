@@ -1,4 +1,4 @@
-// takes what we need from the express library and imports into this page
+// takes that we need from the express library and imports into this page
 import {Router} from "express";
 var router = Router();
 
@@ -10,6 +10,13 @@ router.get("/", function(req, res, next) {
 		max = Math.floor(max);
 		return Math.floor(Math.random() * (max - min)) + min; // The maximum is exclusive and the minimum is inclusive
 	}
+
+	// create monster game object
+	// call monster game object function to load a grid with monsters,
+	// and a list of items for the logged in user.
+
+	// then call monster game function to output array for theMonsters
+	// then call monster game function to output array for items.
 
 	let theMonsters = [
 		{

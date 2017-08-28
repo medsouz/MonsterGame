@@ -4,6 +4,9 @@ export default class GridSpace {
 	private Monster: Monster;
 	private GridSpaceTypes: number[];
 
+	// GridSpace as an object exists to allow us to add future functionality for
+	// grid space types, which will have an impact on monster stats when combined with some monster states.
+
 	constructor() {
 		console.log("");
 	}
