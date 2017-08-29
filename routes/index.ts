@@ -5,10 +5,6 @@ import Monster from "../lib/Monster";
 import MonsterState from "../lib/MonsterState";
 let router = Router();
 
-function aoeaea(){
-
-}
-
 /* GET home page. */
 router.get("/", function(req, res, next) {
 
