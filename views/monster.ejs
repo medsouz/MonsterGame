@@ -1,9 +1,33 @@
-HELLO
+<div style="border: 1px green solid;">
 
-<div onClick="goBack()">
-    GO HOME
+    <div class="row">
+        <h1 class="text-center"><%= theMonster.getUserMonsterName() %></h1>
+    </div>
+    <div class="row col-md-offset-2">
+        <div class="col-md-4">
+            <table>
+                <!-- this is the order it should be in -->
+                <!-- hun, str int -->
+                <% for(let i =0; i < theMonster.getMonsterStates().length; i++) { %>
+                    <tr>
+                        <%= theMonster.getMonsterStates()[i].getMonsterStateName() %>
+                    </tr>
+                    <tr>
+                        <%= theMonster.getMonsterStates()[i].getMonterStateValue() %>
+                    </tr>
+                <% } %>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <img src="/img/monster/<%= theMonster.getMonsterPictureId() %>.png" style="height: 50%" alt="">
+        </div>
+    </div>
+
+    <div class="row">
+        <button class="btn btn-primary center-block" onclick="goBack()" style="width: 50%">Go Back</button>
+    </div>
+
 </div>
-
 <script>
     function goBack(){
         $("#gameGrid").load("/gameGrid");

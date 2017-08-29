@@ -1,15 +1,19 @@
+import MonsterState from "./MonsterState";
+
 export default class Monster {
 
 	private UserMonsterID: number;
 	private UserMonsterName: string;
 	private MonsterDefaultName: string;
-	private MonsterStates: number[];
+	private MonsterStates: MonsterState[];
 	private IsEgg: boolean;
 	private MonsterPictureId: string;
 
-	constructor(name: string, pictureId: string) {
+	constructor(name: string, pictureId: string, monsterStates: MonsterState[], monsterId: number) {
 		this.setUserMonsterName(name);
 		this.setMonsterPictureId(pictureId);
+		this.setMonsterState(monsterStates);
+		this.setUserMonsterID(monsterId);
 	}
 
 	public getUserMonsterID() {
@@ -37,16 +41,15 @@ export default class Monster {
 	}
 
 	public getMonsterStates() {
-		return null;
+		return this.MonsterStates;
 	}
 
 	public addMonsterState() {
 		return null;
 	}
 
-	public setMonsterState() {
-		// can be used to clear list, or to remove or update specific states
-		return null;
+	public setMonsterState(monsterStates: MonsterState[]) {
+		this.MonsterStates = monsterStates;
 	}
 
 	public getMonsterTypes() {
