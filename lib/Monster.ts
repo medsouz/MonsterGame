@@ -1,4 +1,5 @@
 import MonsterState from "./MonsterState";
+import Item from "./Item";
 
 export default class Monster {
 
@@ -35,6 +36,21 @@ export default class Monster {
 		monster1 = this.fakeMonsterDB(userID, userMonsterID);
 
 		return monster1;
+	}
+
+	public useItem(item: Item, state: number) {
+
+		var monsterState: MonsterState = this.MonsterStates[state];
+		var oldValue: number = monsterState.getMonterStateValue();
+		monsterState.setMosterStateValue(oldValue + item.getItemValue());
+		this.MonsterStates[state] = monsterState;
+
+		// TODO: update this value in db
+	}
+
+	public clickMonster() {
+		// TODO: clicking monster should update happiness in DB
+		console.log("clicked Monster!");
 	}
 
 	public getMonsterID() {
@@ -121,7 +137,7 @@ export default class Monster {
 			fakeDB[i].setUserMonsterID(0);
 			fakeDB[i].setUserMonsterName("monster" + i);
 			fakeDB[i].setMonsterDefaultName("defaultName" + i);
-			fakeDB[i].setMonsterStates([new MonsterState(0, "Happiness", 50), new MonsterState(1, "Hunger", 50), new MonsterState(2, "Intelligence", 50), new MonsterState(3, "Strength", 50)]);
+			fakeDB[i].setMonsterStates([new MonsterState(0, "Happiness", 50), new MonsterState(1, "Hunger", 40), new MonsterState(2, "Intelligence", 30), new MonsterState(3, "Strength", 50)]);
 			fakeDB[i].setIsEgg(false);
 			fakeDB[i].setMonsterPictureId(i + "A");
 		}

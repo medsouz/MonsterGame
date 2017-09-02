@@ -8,4 +8,6 @@ export default class UserItems extends Model<UserItems> {
 	public ItemID: number;
 	@Column
 	public UserID: number;
+	@Column
+	public ItemCount: number;
 }

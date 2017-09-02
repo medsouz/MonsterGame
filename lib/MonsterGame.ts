@@ -5,29 +5,51 @@ import ActivityLog from "./ActivityLog";
 
 export default class MonsterGame {
 
-	private grid: Grid;
-	private user: User;
-	private items: Item[];
-	private activityLog: ActivityLog;
+	private Grid: Grid;
+	private User: User;
+	private Items: Item[];
+	private ActivityLog: ActivityLog;
 
 	constructor() {
-		console.log("");
+		// TODO: change this to pull from DB and implement User information
+
+		// this.setUser(user);
+
+		var grid1 = new Grid();
+		grid1.createGridFromDB(0);
+		this.setGrid(grid1);
+
+		var items: Item[] = [
+			new Item(),
+			new Item(),
+			new Item(),
+			new Item(),
+			new Item(),
+			new Item(),
+			new Item(),
+			new Item()
+		];
+		var counter1 = items.length;
+		for (var i = 0; i < counter1; i++) {
+			items[i].updateItemFromDB(0, i);
+
+		}
 	}
 
 	public getGrid() {
-		return null;
+		return this.Grid;
 	}
 
-	public setGrid() {
-		return null;
+	public setGrid(grid: Grid) {
+		this.Grid = grid;
 	}
 
 	public getUser() {
-		return null;
+		return this.Grid;
 	}
 
-	public setUser() {
-		return null;
+	public setUser(user: User) {
+		this.User = user;
 	}
 
 	public getItems() {

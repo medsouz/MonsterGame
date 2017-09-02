@@ -5,14 +5,14 @@ export default class MonsterState {
 	private MonsterStateValue: number;
 
 	constructor(id: number, name: string, value: number) {
-		this.senMonsterStateId(id);
+		this.setMonsterStateId(id);
 		this.setMonsterStateName(name);
 		this.setMosterStateValue(value);
 	}
 	public getMonsterStateId() {
 		return this.MonsterStateId;
 	}
-	public senMonsterStateId(id: number) {
+	public setMonsterStateId(id: number) {
 		this.MonsterStateId = id;
 	}
 	public getMonsterStateName() {
