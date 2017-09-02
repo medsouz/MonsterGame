@@ -7,8 +7,8 @@ import {User} from "../models/User";
 import {IFindOptions} from "sequelize-typescript";
 import {Sequelize} from "sequelize-typescript";
 
-var router = express.Router();
-var UserModel = new User();
+let router = express.Router();
+let UserModel = new User();
 
 passport.serializeUser(function(user: User, done) {
 	done(null, user.UserID);
