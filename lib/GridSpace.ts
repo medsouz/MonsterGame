@@ -1,4 +1,5 @@
 import Monster from "./Monster";
+import MonsterState from "./MonsterState";
 
 export default class GridSpace {
 	private Monster: Monster;

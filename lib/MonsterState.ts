@@ -21,10 +21,10 @@ export default class MonsterState {
 	public setMonsterStateName(name: string) {
 		this.MonsterStateName = name;
 	}
-	public getMonterStateValue(){
+	public getMonterStateValue() {
 		return this.MonsterStateValue;
 	}
-	public setMosterStateValue(value: number){
+	public setMosterStateValue(value: number) {
 		this.MonsterStateValue = value;
 	}
 
