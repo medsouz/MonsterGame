@@ -1,0 +1,16 @@
+<div class='purple' style="height:30%">
+    <div class="row">
+        <h1 class="text-center">Inventory</h1>
+    </div>
+    <div class="row">
+        <% for(let i =0; i < inventory.length; i++) { %>
+        <div class="col-sm-3">
+            <div class="yellow box">
+                <%= inventory[i].name %> x <%= inventory[i].amount %>
+                <br/>
+                <img src="/img/monster/<%= inventory[i].picture %>.png" alt="">
+            </div>
+        </div>
+        <% } %>
+    </div>
+</div>

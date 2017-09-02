@@ -66,4 +66,53 @@ router.get("/gameGrid", function(req, res, next) {
 	res.render("gameGrid", { monsters: theMonsters });
 });
 
+router.get("/inventory", function(req, res, next) {
+
+	// yup this happened
+	let theInventory = [
+		{
+			name: "Food",
+			amount: 100,
+			picture: "0A"
+		},
+		{
+			name: "Food",
+			amount: 100,
+			picture: "0A"
+		},
+		{
+			name: "Food",
+			amount: 100,
+			picture: "0A"
+		},
+		{
+			name: "Food",
+			amount: 100,
+			picture: "0A"
+		},
+		{
+			name: "Food",
+			amount: 100,
+			picture: "0A"
+		},
+		{
+			name: "Food",
+			amount: 100,
+			picture: "0A"
+		},
+		{
+			name: "Food",
+			amount: 100,
+			picture: "0A"
+		},
+		{
+			name: "Food",
+			amount: 100,
+			picture: "0A"
+		}
+	];
+
+	res.render("inventory", { inventory: theInventory});
+});
+
 module.exports = router;
