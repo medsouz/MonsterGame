@@ -1,8 +1,8 @@
-import {Table, Column, Model, HasMany} from "sequelize-typescript";
+import {Table, Column, Model, PrimaryKey, AutoIncrement, HasMany} from "sequelize-typescript";
 
 @Table
 export default class GridSpaceTypeEffects extends Model<GridSpaceTypeEffects> {
-	@Column
+	@Column({primaryKey: true})
 	public GridSpaceTypeEffectID: number;
 	@Column
 	public GridSpaceTypeEffectValue: number;

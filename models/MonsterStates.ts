@@ -1,8 +1,8 @@
-import {Table, Column, Model, HasMany} from "sequelize-typescript";
+import {Table, Column, Model, PrimaryKey, AutoIncrement, HasMany} from "sequelize-typescript";
 
 @Table
 export default class MonsterStates extends Model<MonsterStates> {
-	@Column
+	@Column({primaryKey: true})
 	public MonsterStateID: number;
 	@Column
 	public MonsterID: number;

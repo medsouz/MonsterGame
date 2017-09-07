@@ -1,8 +1,8 @@
-import {Table, Column, Model, HasMany} from "sequelize-typescript";
+import {Table, Column, Model, PrimaryKey, AutoIncrement, HasMany} from "sequelize-typescript";
 
 @Table
 export default class ItemEffectsList extends Model<ItemEffectsList> {
-	@Column
+	@Column({primaryKey: true})
 	public ItemEffectsListID: number;
 	@Column
 	public ItemID: number;

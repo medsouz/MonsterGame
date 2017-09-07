@@ -12,6 +12,16 @@ export default class Grid {
 		this.GridSizeY = 3;
 	}
 
+	// public getGrid(userID: number) {
+	// 	GridSpaceModel.findAll({
+	// 		where: {
+	// 			UserID: userID
+	// 		}
+	// 	}).then(function(gridSpaceModel){
+	// 		console.log(gridSpaceModel);
+	// 	});
+	// }
+
 	public createGridFromDB(userID: number) {
 
 		let grid: GridSpace[] = [

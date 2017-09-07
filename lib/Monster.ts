@@ -1,5 +1,9 @@
 import MonsterState from "./MonsterState";
 import Item from "./Item";
+import Monsters from "../models/Monsters";
+import UserMonsters from "../models/UserMonsters";
+import MonsterStates from "../models/MonsterStates";
+import UserMonsterStatesList from "../models/UserMonsterStatesList";
 
 export default class Monster {
 
@@ -37,6 +41,28 @@ export default class Monster {
 
 		return monster1;
 	}
+
+	public getMonsterFromDB(userMonsterID: number) {
+		var monster1: Monster;
+
+		// search for attributes
+		UserMonsters.findOne({ where: {UserMonsterID: userMonsterID}, attributes: [
+			"UserMonsterID", "MonsterID", "UserMonsterName", "isEgg"]
+	 	}).then(function(monsterModel) {
+  		console.log(monsterModel.UserMonsterName);
+	});
+
+	}
+
+	// public getGrid(userID: number) {
+	// 	GridSpaceModel.findAll({
+	// 		where: {
+	// 			UserID: userID
+	// 		}
+	// 	}).then(function(gridSpaceModel){
+	// 		console.log(gridSpaceModel);
+	// 	});
+	// }
 
 	public useItem(item: Item, state: number) {
 
@@ -134,7 +160,7 @@ export default class Monster {
 
 		for (var i = 0; i < 12; i++) {
 			fakeDB[i].setMonsterID(i);
-			fakeDB[i].setUserMonsterID(0);
+			fakeDB[i].setUserMonsterID(i);
 			fakeDB[i].setUserMonsterName("monster" + i);
 			fakeDB[i].setMonsterDefaultName("defaultName" + i);
 			fakeDB[i].setMonsterStates([new MonsterState(0, "Happiness", 50), new MonsterState(1, "Hunger", 40), new MonsterState(2, "Intelligence", 30), new MonsterState(3, "Strength", 50)]);

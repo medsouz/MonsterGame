@@ -36,6 +36,8 @@ export default class MonsterGame {
 		}
 	}
 
+	// TODO: need function for if no user grid exists to create a new one with random monsters
+
 	public getGrid() {
 		return this.Grid;
 	}

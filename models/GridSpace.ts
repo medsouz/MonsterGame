@@ -1,8 +1,9 @@
-import {Table, Column, Model, HasMany} from "sequelize-typescript";
+import {Table, Column, Model, PrimaryKey, AutoIncrement, HasMany} from "sequelize-typescript";
 
 @Table
 export default class GridSpace extends Model<GridSpace> {
-	@Column
+
+	@Column({primaryKey: true})
 	public GridSpaceID: number;
 	@Column
 	public UserGridID: number;

@@ -35,7 +35,11 @@ router.get("/showMonster/:id", function(req, res, next) {
 
 	let monsterDisplay = new Monster();
 
-	monsterDisplay = monsterGame1.getGrid().getGridSpace(0).getMonster();
+	monsterDisplay = monsterGame1.getGrid().getGridSpace(id).getMonster();
+
+	// TODO: delete test below
+	var monster1 = new Monster();
+	monster1.getMonsterFromDB(11);
 
 	res.render("monster", { theMonster: monsterDisplay} );
 });
