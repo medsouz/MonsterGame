@@ -6,4 +6,6 @@ export default class Monsters extends Model<Monsters> {
 	public MonsterID: number;
 	@Column
 	public MonsterDefaultName: string;
+	@Column
+	public MonsterPictureId: string;
 }

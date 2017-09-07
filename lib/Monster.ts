@@ -43,15 +43,59 @@ export default class Monster {
 	}
 
 	public getMonsterFromDB(userMonsterID: number) {
-		var monster1: Monster;
 
-		// search for attributes
+	  	let monster1: Monster = new Monster();
+
 		UserMonsters.findOne({ where: {UserMonsterID: userMonsterID}, attributes: [
 			"UserMonsterID", "MonsterID", "UserMonsterName", "isEgg"]
 	 	}).then(function(monsterModel: UserMonsters) {
-			if(monsterModel != null)
-  				console.log(monsterModel.UserMonsterName);
+			if (monsterModel != null) {
+  				monster1.setUserMonsterID(monsterModel.UserMonsterID);
+				monster1.setUserMonsterName(monsterModel.UserMonsterName);
+				monster1.setMonsterID(monsterModel.MonsterID);
+				monster1.setIsEgg(monsterModel.isEgg);
+				console.log("point1 " + monsterModel.MonsterID);
+				console.log(monster1);
+			} else {
+				console.log("UserMonster " + userMonsterID + " not found in database");
+				console.log(monster1);
+			}
 		});
+
+		Monsters.findOne({ where: {MonsterID: monster1.getMonsterID()}, attributes: [
+			"MonsterID", "MonsterDefaultName", "MonsterPictureId"]
+		}).then(function(monsterModel: Monsters) {
+
+			if (monsterModel != null) {
+				monster1.setMonsterDefaultName(monsterModel.MonsterDefaultName);
+				monster1.setMonsterPictureId(monsterModel.MonsterPictureId);
+				console.log("point2");
+			} else {
+				console.log("Monster " + monster1.getMonsterID() + " not found in database");
+				console.log(monster1);
+			}
+		});
+
+		UserMonsterStatesList.findAll({ where: {UserMonsterID: userMonsterID}, attributes: [
+			"MonsterStateID", "Value"]
+		}).then(function(monsterModel: UserMonsterStatesList[]) {
+			if (monsterModel != null) {
+				var stateNames: string[];
+				var states: MonsterState[] = new Array();
+				for (let i of monsterModel) {
+					var modelState: MonsterState = new MonsterState(i.MonsterStateID, i.Value);
+					states.push(modelState);
+				}
+				monster1.setMonsterStates(states);
+				console.log("point3");
+				console.log(monster1);
+			} else {
+				console.log("MonsterStates for " + userMonsterID + " not found in database");
+				console.log(monster1);
+			}
+		});
+
+		console.log("point4");
 
 	}
 
@@ -164,7 +208,7 @@ export default class Monster {
 			fakeDB[i].setUserMonsterID(i);
 			fakeDB[i].setUserMonsterName("monster" + i);
 			fakeDB[i].setMonsterDefaultName("defaultName" + i);
-			fakeDB[i].setMonsterStates([new MonsterState(0, "Happiness", 50), new MonsterState(1, "Hunger", 40), new MonsterState(2, "Intelligence", 30), new MonsterState(3, "Strength", 50)]);
+			fakeDB[i].setMonsterStates([new MonsterState(0, 50), new MonsterState(1, 40), new MonsterState(2, 30), new MonsterState(3, 50)]);
 			fakeDB[i].setIsEgg(false);
 			fakeDB[i].setMonsterPictureId(i + "A");
 		}

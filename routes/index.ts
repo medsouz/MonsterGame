@@ -31,7 +31,6 @@ router.get("/", function(req, res, next) {
 router.get("/showMonster/:id", function(req, res, next) {
 	// this will give out monster id to then get from db;
 	let id = req.params.id;
-	// todo monster game function.........to take user id.....and user monster id.....and return monster....
 
 	let monsterDisplay = new Monster();
 

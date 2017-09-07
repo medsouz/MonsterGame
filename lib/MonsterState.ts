@@ -4,10 +4,10 @@ export default class MonsterState {
 	private MonsterStateName: string;
 	private MonsterStateValue: number;
 
-	constructor(id: number, name: string, value: number) {
+	constructor(id: number, stateValue: number) {
 		this.setMonsterStateId(id);
-		this.setMonsterStateName(name);
-		this.setMosterStateValue(value);
+		this.setMonsterStateName("default");
+		this.setMosterStateValue(stateValue);
 	}
 	public getMonsterStateId() {
 		return this.MonsterStateId;

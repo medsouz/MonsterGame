@@ -7,7 +7,7 @@ export default class UserMonsterStatesList extends Model<UserMonsterStatesList> 
 	@Column
 	public UserMonsterID: number;
 	@Column
-	public MonsterStateID: string;
+	public MonsterStateID: number;
 	@Column
 	public Value: number;
 
