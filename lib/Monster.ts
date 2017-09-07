@@ -48,9 +48,10 @@ export default class Monster {
 		// search for attributes
 		UserMonsters.findOne({ where: {UserMonsterID: userMonsterID}, attributes: [
 			"UserMonsterID", "MonsterID", "UserMonsterName", "isEgg"]
-	 	}).then(function(monsterModel) {
-  		console.log(monsterModel.UserMonsterName);
-	});
+	 	}).then(function(monsterModel: UserMonsters) {
+			if(monsterModel != null)
+  				console.log(monsterModel.UserMonsterName);
+		});
 
 	}
 
