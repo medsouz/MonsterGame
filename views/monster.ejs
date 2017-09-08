@@ -1,4 +1,4 @@
-<div style="border: 1px green solid;">
+<div>
 
     <div class="row">
         <h1 class="text-center"><%= theMonster.getUserMonsterName() %></h1>
@@ -10,10 +10,15 @@
                 <!-- hun, str int -->
                 <% for(let i =0; i < theMonster.getMonsterStates().length; i++) { %>
                     <tr>
-                        <%= theMonster.getMonsterStates()[i].getMonsterStateName() %>
-                    </tr>
-                    <tr>
-                        <%= theMonster.getMonsterStates()[i].getMonterStateValue() %>
+                        <td>
+                            <%= theMonster.getMonsterStates()[i].getMonsterStateName() %>
+                        </td>
+                        <td>
+                            :
+                        </td>
+                        <td>
+                            <%= theMonster.getMonsterStates()[i].getMonterStateValue() %>
+                        </td>
                     </tr>
                 <% } %>
             </table>

@@ -1,7 +1,7 @@
 <% for(var i=0; i < monsters.length; i++) {%>
 
     <div class="col-sm-3 noPadding">
-        <div onclick="show(<%= monsters[i].getMonster().getUserMonsterID() %>)" class="yellow box">
+        <div onclick="show(<%= monsters[i].getMonster().getUserMonsterID() %>)" class="box">
             <%= monsters[i].getMonster().getUserMonsterName() %>
             <img src="/img/monster/<%= monsters[i].getMonster().getMonsterPictureId() %>.png" style="float: right; height: 100%"/>
         </div>
