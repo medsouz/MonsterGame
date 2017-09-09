@@ -3,8 +3,6 @@ import ItemInventory from "./ItemInventory";
 
 @Table
 export default class User extends Model<User> {
-	@Column({primaryKey: true})
-	public UserID: number;
 	@Column
 	public UserName: string;
 	@Column
@@ -17,6 +15,10 @@ export default class User extends Model<User> {
 	public ItemInventoryId: number;
 	@HasMany(() => ItemInventory)
 	public ItemInventory: ItemInventory;
+
+	public toString = (): string => {
+		return ((this.AccountType === eAccountType.Admin) ? "[ADMIN] " : "") + this.UserName;
+	}
 }
 
 export enum eAccountType {

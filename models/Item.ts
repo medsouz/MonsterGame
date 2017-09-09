@@ -19,4 +19,7 @@ export default class Item extends Model<Item> {
 	@BelongsTo(() => ItemSlot)
 	public ItemSlot: ItemSlot;
 
+	public toString = (): string => {
+		return this.Name;
+	}
 }

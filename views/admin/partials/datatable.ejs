@@ -1,0 +1,9 @@
+<h3><%= dataType %>s</h3>
+<a href="/admin/new/<%= dataType.toLowerCase() %>">Add New</a>
+<table class="table table-striped">
+	<% for(var d in locals.data) { %>
+	<tr>
+		<td><a href="/admin/edit/<%= dataType.toLowerCase() %>/<%= data[d]["id"] %>"><%= data[d] %></a></td>
+	</tr>
+	<% } %>
+</table>

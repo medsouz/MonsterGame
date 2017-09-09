@@ -12,13 +12,13 @@ let router = express.Router();
 let UserModel = new User();
 
 passport.serializeUser(function(user: User, done) {
-	done(null, user.UserID);
+	done(null, user.id);
 });
 
 passport.deserializeUser(function(userID, done) {
 	User.findOne({
 		where: {
-			UserID: userID
+			id: userID
 		}
 	}).then(function(user: User){
 		if (user != null)

@@ -27,5 +27,4 @@ export default class Monster extends Model<Monster> {
 
 	@HasMany(() => ActiveItem)
 	public ActiveItem: ActiveItem;
-
 }

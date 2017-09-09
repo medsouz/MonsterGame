@@ -7,4 +7,8 @@ export default class MonsterType extends Model<MonsterType> {
 	public PictureID: string;
 	@Column
 	public DefaultName: string;
+
+	public toString = (): string => {
+		return this.DefaultName;
+	}
 }
