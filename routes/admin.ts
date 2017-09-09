@@ -5,9 +5,16 @@ import MonsterType from "../models/MonsterType";
 import Item from "../models/Item";
 var router = Router();
 
+// Only allow authenticated administrators onto admin pages
+router.use(function(req, res, next) {
+	if (req.user && req.user.AccountType === eAccountType.Admin)
+		next();
+	else
+		res.redirect("/");
+});
+
 /* GET admin home page. */
 router.get("/", function(req, res, next) {
-	if (req.user && req.user.AccountType === eAccountType.Admin)
 		User.findAll().then(function(users: User[]) {
 			MonsterType.findAll().then(function(monsters: MonsterType[]) {
 				Item.findAll().then(function(items: Item[]) {
@@ -15,8 +22,6 @@ router.get("/", function(req, res, next) {
 				});
 			});
 		});
-	else
-		res.redirect("/");
 });
 
 module.exports = router;
