@@ -32,3 +32,9 @@ h1 {
 	overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 	border-right: 1px solid #eee;
 }
+
+@media (max-width: 576px) {
+	.sidebar {
+		position: inherit;
+	}
+}
