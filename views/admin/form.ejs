@@ -1,2 +1,2 @@
-<h1><%= type %></h1>
+<h1><%= (locals.data) ? "Editing" : "New"%> <%= type.charAt(0).toUpperCase() + type.slice(1); %></h1>
 <%- include("forms/" + type, { data: locals.data }); %>
