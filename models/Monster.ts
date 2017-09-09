@@ -27,13 +27,13 @@ export default class Monster extends Model<Monster> {
 	@ForeignKey(() => MonsterStateValue)
 	@Column
 	public MonsterStateValueId: number;
-	@BelongsTo(() => MonsterStateValue)
+	@HasMany(() => MonsterStateValue)
 	public MonsterStateValue: MonsterStateValue;
 
 	@ForeignKey(() => ActiveItem)
 	@Column
 	public ActiveItemId: number;
-	@BelongsTo(() => ActiveItem)
+	@HasMany(() => ActiveItem)
 	public ActiveItem: ActiveItem;
 
 }

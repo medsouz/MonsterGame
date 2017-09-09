@@ -1,4 +1,5 @@
-import {Table, Column, Model, PrimaryKey, AutoIncrement, HasMany} from "sequelize-typescript";
+import {Table, Column, Model, PrimaryKey, AutoIncrement, HasMany, ForeignKey} from "sequelize-typescript";
+import ItemInventory from "./ItemInventory";
 
 @Table
 export default class User extends Model<User> {
@@ -10,6 +11,12 @@ export default class User extends Model<User> {
 	public Password: string;
 	@Column
 	public AccountType: eAccountType;
+
+	@ForeignKey(() => ItemInventory)
+	@Column
+	public ItemInventoryId: number;
+	@HasMany(() => ItemInventory)
+	public ItemInventory: ItemInventory;
 }
 
 export enum eAccountType {

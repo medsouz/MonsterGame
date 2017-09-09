@@ -15,7 +15,7 @@ export default class Item extends Model<Item> {
 	@ForeignKey(() => ItemEffect)
 	@Column
 	public ItemEffectId: number;
-	@BelongsTo(() => ItemEffect)
+	@HasMany(() => ItemEffect)
 	public ItemEffect: ItemEffect;
 
 	@ForeignKey(() => ItemSlot)
