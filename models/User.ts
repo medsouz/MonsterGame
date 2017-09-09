@@ -8,4 +8,11 @@ export default class User extends Model<User> {
 	public UserName: string;
 	@Column
 	public Password: string;
+	@Column
+	public AccountType: eAccountType;
+}
+
+export enum eAccountType {
+	User,
+	Admin
 }

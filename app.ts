@@ -75,6 +75,7 @@ app.use(passport.session());
 // includes routing files to better organize page routing
 app.use("/", require("./routes/index"));
 app.use("/auth", require("./routes/auth"));
+app.use("/admin", require("./routes/admin"));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

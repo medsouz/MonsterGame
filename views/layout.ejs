@@ -12,12 +12,17 @@
 	<body>
 		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 			<% if(locals.user) { %>
-			<a class="navbar-brand" href="#">Welcome <%= user.UserName%></a>
+			<a class="navbar-brand" href="/">Welcome <%= user.UserName%></a>
 			<button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarsDefault">
 				<ul class="navbar-nav mr-auto">
+					<% if(user.AccountType == 1) { %>
+						<li class="nav-item">
+							<a class="nav-link" href="/admin/">Admin Panel</a>
+						</li>
+					<% } %>
 				</ul>
 				<ul class="navbar-nav navbar-right">
 					<li class="nav-item">
@@ -26,7 +31,7 @@
 				</ul>
 			</div>
 			<% } else { %>
-			<a class="navbar-brand" href="#">MonsterGame</a>
+			<a class="navbar-brand" href="/">MonsterGame</a>
 			<% } %>
 		</nav>
 		<div class="container-fluid">

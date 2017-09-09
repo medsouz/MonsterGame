@@ -4,6 +4,7 @@ import * as passport from "passport";
 import {Strategy as LocalStrategy} from "passport-local";
 
 import User from "../models/User";
+import {eAccountType} from "../models/User";
 import {IFindOptions} from "sequelize-typescript";
 import {Sequelize} from "sequelize-typescript";
 
@@ -77,7 +78,8 @@ router.post("/register", function(req, res, next) {
 				var key = require("crypto").pbkdf2Sync(req.body.password, "NaCL" /* TODO: Better salting */, 30000, 512, "sha512");
 				User.create({
 					UserName: req.body.username,
-					Password: key
+					Password: key,
+					AccountType: eAccountType.User
 				}).then(function(newUser: User){
 					req.flash("error", "Created new user!");
 					res.redirect("/");
