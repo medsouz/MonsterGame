@@ -1,1 +1,31 @@
-model: <%= data %>
+<div class="form-group">
+	<label for="inputItemName">Item Name</label>
+	<input type="text" class="form-control" id="inputItemName"
+			aria-describedby="itemNameHelp" placeholder="Enter Item Name"
+			value="<%= (data) ? data.itemName : ""  %>">
+	<small id="itemNameHelp" class="form-text text-muted">Item Name</small>
+</div>
+<div class="form-group">
+	<label for="inputItemSlot">Item Slot</label><br>
+	<select class="custom-select" aria-describedby="itemSlotHelp">
+		<option value="0" <%= (data) ? ((data.ItemSlot == 0) ? "selected" : "") : ""  %>>itemSlot1</option>
+		<option value="1" <%= (data) ? ((data.ItemSlot == 1) ? "selected" : "") : ""  %>>itemSlot2</option>
+		<option value="2" <%= (data) ? ((data.ItemSlot == 2) ? "selected" : "") : ""  %>>itemSlot3</option>
+		<option value="3" <%= (data) ? ((data.ItemSlot == 3) ? "selected" : "") : ""  %>>itemSlot4</option>
+		<option value="4" <%= (data) ? ((data.ItemSlot == 4) ? "selected" : "") : ""  %>>itemSlot5</option>
+		<option value="5" <%= (data) ? ((data.ItemSlot == 5) ? "selected" : "") : ""  %>>itemSlot6</option>
+	</select>
+	<small id="itemSlotHelp" class="form-text text-muted">Item Slot</small>
+</div>
+<div class="form-group">
+	<label for="inputItemEffects">Item Effects: can have multiple?</label><br>
+	<select class="custom-select" aria-describedby="itemEffectsHelp">
+		<option value="0" <%= (data) ? ((data.ItemEffects == 0) ? "selected" : "") : ""  %>>itemEffect1</option>
+		<option value="1" <%= (data) ? ((data.ItemEffects == 1) ? "selected" : "") : ""  %>>itemEffect</option>
+		<option value="2" <%= (data) ? ((data.ItemEffects == 2) ? "selected" : "") : ""  %>>itemEffect3</option>
+		<option value="3" <%= (data) ? ((data.ItemEffects == 3) ? "selected" : "") : ""  %>>itemEffect4</option>
+		<option value="4" <%= (data) ? ((data.ItemEffects == 4) ? "selected" : "") : ""  %>>itemEffect5</option>
+		<option value="5" <%= (data) ? ((data.ItemEffects == 5) ? "selected" : "") : ""  %>>itemEffect6</option>
+	</select>
+	<small id="itemEffectsHelp" class="form-text text-muted">Item Effects: can have multiple?</small>
+</div>
