@@ -1,12 +1,9 @@
 // takes what we need from the express library and imports into this page
 import {Router} from "express";
-import GridSpace from "../lib/GridSpace";
-import Monster from "../lib/Monster";
-import MonsterState from "../lib/MonsterState";
-import MonsterGame from "../lib/MonsterGame";
+
 let router = Router();
 
-var monsterGame1 = new MonsterGame();
+// var monsterGame1 = new MonsterGame();
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
@@ -30,17 +27,21 @@ router.get("/", function(req, res, next) {
 
 router.get("/showMonster/:id", function(req, res, next) {
 	// this will give out monster id to then get from db;
-	let id = req.params.id;
+	// let id = req.params.id;
+	//
+	// let monsterDisplay = new Monster();
+	//
+	// monsterDisplay = monsterGame1.getGrid().getGridSpace(id).getMonster();
+	//
+	// // TODO: delete test below
+	// var monster1 = new Monster();
+	// monster1.getMonsterFromDB(1, 11);
 
-	let monsterDisplay = new Monster();
+	// monster1.getMonsterFromDB(1, 11).then(function(monsterFromDB: Monster){
+	// 	res.render("monster", { theMonster: monsterDisplay} );
+	// });
 
-	monsterDisplay = monsterGame1.getGrid().getGridSpace(id).getMonster();
-
-	// TODO: delete test below
-	var monster1 = new Monster();
-	monster1.getMonsterFromDB(11);
-
-	res.render("monster", { theMonster: monsterDisplay} );
+	// res.render("monster", { theMonster: monsterDisplay} );
 });
 
 router.get("/gameGrid", function(req, res, next) {
@@ -67,10 +68,10 @@ router.get("/gameGrid", function(req, res, next) {
 	// 	theMonsters[i].setMonster(monsterGen.createMonsterFromDB(0, i));
 	// }
 
-	var gameGrid = monsterGame1.getGrid();
-	var theMonsters: GridSpace[] = gameGrid.getGridSpaces();
+	// var gameGrid = monsterGame1.getGrid();
+	// var theMonsters: GridSpace[] = gameGrid.getGridSpaces();
 
-	res.render("gameGrid", { monsters: theMonsters });
+	// res.render("gameGrid", { monsters: theMonsters });
 });
 
 router.get("/inventory", function(req, res, next) {

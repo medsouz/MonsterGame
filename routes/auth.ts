@@ -3,7 +3,7 @@ import {Request, Response} from "express";
 import * as passport from "passport";
 import {Strategy as LocalStrategy} from "passport-local";
 
-import {User} from "../models/User";
+import User from "../models/User";
 import {IFindOptions} from "sequelize-typescript";
 import {Sequelize} from "sequelize-typescript";
 
@@ -19,7 +19,7 @@ passport.deserializeUser(function(userID, done) {
 		where: {
 			UserID: userID
 		}
-	}).then(function(user){
+	}).then(function(user: User){
 		if (user != null)
 			done(null, user);
 		else
@@ -33,7 +33,7 @@ passport.use(new LocalStrategy(
 
 		User.findOne({
 			where: { UserName: name, Password: key }
-		}).then(function(user) {
+		}).then(function(user: User) {
 			console.log(user);
 			if (user != null) {
 				done(null, user);
@@ -68,7 +68,7 @@ router.post("/register", function(req, res, next) {
 	if (req.body.username.match("^[A-Za-z0-9_]{3,20}$") && req.body.password === req.body.confirmPassword) {
 		User.findOne({
 			where: { UserName: req.body.username }
-		}).then(function(existingUser) {
+		}).then(function(existingUser: User) {
 			if (existingUser != null) {
 				req.flash("error", "Username is already in use");
 				res.redirect("/auth/register");
@@ -78,7 +78,7 @@ router.post("/register", function(req, res, next) {
 				User.create({
 					UserName: req.body.username,
 					Password: key
-				}).then(function(newUser){
+				}).then(function(newUser: User){
 					req.flash("error", "Created new user!");
 					res.redirect("/");
 				});

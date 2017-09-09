@@ -1,11 +1,10 @@
 import {Table, Column, Model, PrimaryKey, AutoIncrement, HasMany} from "sequelize-typescript";
 
 @Table
-export default class User extends Model<User> {
+export default class ItemSlot extends Model<ItemSlot> {
+
 	@Column({primaryKey: true})
-	public UserID: number;
+	public ItemSlotId: number;
 	@Column
-	public UserName: string;
-	@Column
-	public Password: string;
+	public Name: string;
 }
