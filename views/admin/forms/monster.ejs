@@ -1,1 +1,59 @@
 model: <%= data %>
+
+<div id="wrapper">
+	<div>
+		<div>
+
+			<h2>Create Monster</h2>
+
+			<form action="" method="post">
+
+			<div class="form-group col-lg-4 ">
+				<label for="monsterDefaultName">Monster Default Name</label>
+				<input id="monsterDefaultName" name="monsterDefaultName" class="form-control" type="text"/>
+					<%= (data) ? data.monsterDefaultName : ""  %>
+				</input>
+			</div>
+
+			<br/>
+
+			<div class="form-group col-lg-4 ">
+				<label for="monsterType">Monster Type: Change to dropdown?</label>
+				<input id="monsterType" name="monsterType" class="form-control" type="text"/>
+					<%= (data) ? data.monsterType : ""  %>
+				</input>
+			</div>
+
+			<br/>
+
+			<div class="form-group col-lg-4 ">
+				<label for="monsterPictureId">Monster Picture ID</label>
+				<input id="monsterPictureId" name="monsterPictureId" class="form-control" type="text"/>
+					<%= (data) ? data.monsterPictureId : ""  %>
+				</input>
+			</div>
+
+			<br/>
+
+			<div class="form-group col-lg-4 ">
+				<label for="defaultMonsterStateValue">Default Monster State Value</label>
+				<input id="defaultMonsterStateValue" name="defaultMonsterStateValue" class="form-control" type="text"/>
+					<%= (data) ? data.monsterPictureId : ""  %>
+				</input>
+			</div>
+
+			<br/>
+
+			<button type="submit" class="btn btn-success">Login</button>
+			<a class="btn btn-primary" href="">Create Monster</a>
+
+			</form>
+
+			<br/><br/>
+            <% if (messages.length > 0) { %>
+				<div class="alert alert-danger"><%= messages %></div>
+            <% } %>
+
+		</div>
+	</div>
+</div>
