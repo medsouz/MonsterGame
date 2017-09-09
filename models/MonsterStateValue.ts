@@ -1,4 +1,4 @@
-import {Table, Column, Model, PrimaryKey, AutoIncrement, HasMany, HasOne, BelongsTo, ForeignKey} from "sequelize-typescript";
+import {Table, Column, Model, BelongsTo, ForeignKey} from "sequelize-typescript";
 import MonsterStateType from "./MonsterStateType";
 import Monster from "./Monster";
 

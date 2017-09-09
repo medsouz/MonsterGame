@@ -1,12 +1,9 @@
-import {Table, Column, Model, PrimaryKey, AutoIncrement, HasMany, HasOne, BelongsTo, ForeignKey} from "sequelize-typescript";
+import {Table, Column, Model, BelongsTo, ForeignKey} from "sequelize-typescript";
 import Item from "./Item";
 import User from "./User";
 
 @Table
 export default class ItemInventory extends Model<ItemInventory> {
-
-	@Column({primaryKey: true})
-	public ItemInventoryId: number;
 
 	@ForeignKey(() => User)
 	@Column

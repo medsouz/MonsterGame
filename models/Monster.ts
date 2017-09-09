@@ -1,4 +1,4 @@
-import {Table, Column, Model, PrimaryKey, AutoIncrement, HasMany, HasOne, BelongsTo, ForeignKey} from "sequelize-typescript";
+import {Table, Column, Model, HasMany, BelongsTo, ForeignKey} from "sequelize-typescript";
 import User from "./User";
 import MonsterType from "./MonsterType";
 import MonsterStateValue from "./MonsterStateValue";
@@ -7,8 +7,6 @@ import ActiveItem from "./ActiveItem";
 @Table
 export default class Monster extends Model<Monster> {
 
-	@Column({primaryKey: true})
-	public MonsterId: number;
 	@Column
 	public Name: string;
 

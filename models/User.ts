@@ -1,4 +1,4 @@
-import {Table, Column, Model, PrimaryKey, AutoIncrement, HasMany, ForeignKey} from "sequelize-typescript";
+import {Table, Column, Model, HasMany, ForeignKey} from "sequelize-typescript";
 import ItemInventory from "./ItemInventory";
 
 @Table
