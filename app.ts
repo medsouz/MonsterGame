@@ -33,8 +33,8 @@ const sequelize =  new Sequelize({
 	dialect: "sqlite",
 	username: "root",
 	password: "",
-	storage: __dirname + "monstergame.db",
-	modelPaths: [__dirname + "/models"]
+	storage: path.join(__dirname, "monstergame.db"),
+	modelPaths: [path.join(__dirname, "models")]
 });
 
 // applies configuration
@@ -60,6 +60,8 @@ app.use(cookieParser());
 // if a file is in the public folder ont he server, serves the file
 // instead of using page routing
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/bootstrap", express.static(path.join(__dirname, "node_modules/bootstrap/dist")));
+app.use("/jquery", express.static(path.join(__dirname, "node_modules/jquery/dist")));
 app.use(session({
 	resave: false,
 	saveUninitialized: false,
