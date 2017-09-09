@@ -1,11 +1,10 @@
 import {Table, Column, Model, PrimaryKey, AutoIncrement, HasMany, HasOne, BelongsTo, ForeignKey} from "sequelize-typescript";
 import Item from "./Item";
+import Monster from "./Monster";
 
 @Table
 export default class ActiveItem extends Model<ActiveItem> {
 
-	@Column({primaryKey: true})
-	public ActiveItemId: number;
 	@Column
 	public StartTime: Date;
 	@Column
@@ -17,4 +16,7 @@ export default class ActiveItem extends Model<ActiveItem> {
 	@BelongsTo(() => Item)
 	public Item: Item;
 
+	@ForeignKey(() => Monster)
+	@Column
+	public MonsterId: number;
 }

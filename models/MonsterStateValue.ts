@@ -1,13 +1,16 @@
 import {Table, Column, Model, PrimaryKey, AutoIncrement, HasMany, HasOne, BelongsTo, ForeignKey} from "sequelize-typescript";
 import MonsterStateType from "./MonsterStateType";
+import Monster from "./Monster";
 
 @Table
 export default class MonsterStateValue extends Model<MonsterStateValue> {
 
-	@Column({primaryKey: true})
-	public MonsterStateValueId: number;
 	@Column
 	public Value: number;
+
+	@ForeignKey(() => Monster)
+	@Column
+	public MonsterId: number;
 
 	@ForeignKey(() => MonsterStateType)
 	@Column

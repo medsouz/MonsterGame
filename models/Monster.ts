@@ -24,15 +24,9 @@ export default class Monster extends Model<Monster> {
 	@BelongsTo(() => MonsterType)
 	public MonsterType: MonsterType;
 
-	@ForeignKey(() => MonsterStateValue)
-	@Column
-	public MonsterStateValueId: number;
 	@HasMany(() => MonsterStateValue)
 	public MonsterStateValue: MonsterStateValue;
 
-	@ForeignKey(() => ActiveItem)
-	@Column
-	public ActiveItemId: number;
 	@HasMany(() => ActiveItem)
 	public ActiveItem: ActiveItem;
 

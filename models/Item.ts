@@ -12,9 +12,6 @@ export default class Item extends Model<Item> {
 	@Column
 	public PictureId: string;
 
-	@ForeignKey(() => ItemEffect)
-	@Column
-	public ItemEffectId: number;
 	@HasMany(() => ItemEffect)
 	public ItemEffect: ItemEffect;
 
