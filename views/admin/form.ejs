@@ -1,2 +1,5 @@
 <h1><%= (locals.data) ? "Editing" : "New"%> <%= type.charAt(0).toUpperCase() + type.slice(1); %></h1>
-<%- include("forms/" + type, { data: locals.data }); %>
+<form>
+	<%- include("forms/" + type, { data: locals.data }); %>
+	<button type="submit" class="btn btn-success"><%= (locals.data) ? "Update" : "Add"%></button>
+</form>
