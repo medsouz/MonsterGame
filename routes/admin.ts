@@ -41,48 +41,32 @@ router.get("/new/:type", function(req, res, next) {
 });
 
 router.get("/edit/:type/:id", function(req, res, next) {
-	// TODO: investigate removing duplicate code
+	var dbClass;
 	switch (req.params.type) {
 		case "user":
-			User.findOne({
-				where: {
-					id: req.params.id
-				}
-			}).then(function(user: User){
-				if (user != null)
-					res.render("admin/form", { user : req.user, type: req.params.type, data: user });
-				else
-					res.redirect("/admin");
-			});
+			dbClass = User;
 			break;
 		case "item":
-			Item.findOne({
-				where: {
-					id: req.params.id
-				}
-			}).then(function(item: Item){
-				if (item != null)
-					res.render("admin/form", { user : req.user, type: req.params.type, data: item });
-				else
-					res.redirect("/admin");
-			});
+			dbClass = Item;
 			break;
 		case "monster":
-			MonsterType.findOne({
-				where: {
-					id: req.params.id
-				}
-			}).then(function(monsterType: MonsterType){
-				if (monsterType != null)
-					res.render("admin/edit", { user : req.user, type: req.params.type, data: monsterType });
-				else
-					res.redirect("/admin");
-			});
+			dbClass = MonsterType;
 			break;
 		default:
 			res.redirect("/admin");
 			return;
 	}
+
+	dbClass.findOne({
+		where: {
+			id: req.params.id
+		}
+	}).then(function(result){
+		if (result != null)
+			res.render("admin/form", { user : req.user, type: req.params.type, data: result });
+		else
+			res.redirect("/admin");
+	});
 });
 
 module.exports = router;
