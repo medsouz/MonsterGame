@@ -33,7 +33,7 @@ const sequelize =  new Sequelize({
 	dialect: "sqlite",
 	username: "root",
 	password: "",
-	storage: path.join(__dirname, "monstergame.db"),
+	storage: path.join(__dirname, "/data/monstergame.db"),
 	modelPaths: [path.join(__dirname, "models")]
 });
 
@@ -57,18 +57,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // if page has relevant cookies, takes cookie data in a json variable
 // which is sent to page routing as req object called cookies
 app.use(cookieParser());
+// Enable persistent messages between pages
+app.use(flash());
 // if a file is in the public folder ont he server, serves the file
 // instead of using page routing
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/bootstrap", express.static(path.join(__dirname, "node_modules/bootstrap/dist")));
 app.use("/jquery", express.static(path.join(__dirname, "node_modules/jquery/dist")));
 app.use("/popper", express.static(path.join(__dirname, "node_modules/popper.js/dist/umd")));
+// Passport authentication
 app.use(session({
 	resave: false,
 	saveUninitialized: false,
 	secret: "totally secure text string. no session hijacking here. nope. no way."
 }));
-app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 

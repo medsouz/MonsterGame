@@ -68,3 +68,6 @@ typings/
 
 # Jetbrains IDE files
 .idea/
+
+# User content
+data/
