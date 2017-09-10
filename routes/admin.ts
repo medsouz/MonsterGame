@@ -1,7 +1,7 @@
 import {Router} from "express";
 import User from "../models/User";
 import {eAccountType} from "../models/User";
-import MonsterType from "../models/MonsterType";
+import EntityType from "../models/EntityType";
 import Item from "../models/Item";
 import * as path from "path";
 import {Model} from "sequelize-typescript";
@@ -18,9 +18,9 @@ router.use(function(req, res, next) {
 /* GET admin home page. */
 router.get("/", function(req, res, next) {
 		User.findAll().then(function(users: User[]) {
-			MonsterType.findAll().then(function(monsters: MonsterType[]) {
+			EntityType.findAll().then(function(monsters: EntityType[]) {
 				Item.findAll().then(function(items: Item[]) {
-					res.render("admin/admin", { user : req.user, userList: users, monsterList: monsters, itemList: items });
+					res.render("admin/admin", { user : req.user, userList: users, entityTypeList: monsters, itemList: items });
 				});
 			});
 		});
@@ -31,7 +31,7 @@ router.get("/new/:type", function(req, res, next) {
 	switch (req.params.type) {
 		case "user":
 		case "item":
-		case "monster":
+		case "entitytype":
 			res.render("admin/form", { user : req.user, type: req.params.type });
 			break;
 		default:
@@ -49,8 +49,8 @@ router.get("/edit/:type/:id", function(req, res, next) {
 		case "item":
 			dbClass = Item;
 			break;
-		case "monster":
-			dbClass = MonsterType;
+		case "entitytype":
+			dbClass = EntityType;
 			break;
 		default:
 			res.redirect("/admin");

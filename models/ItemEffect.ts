@@ -18,7 +18,7 @@ export default class ItemEffect extends Model<ItemEffect> {
 
 	@ForeignKey(() => EntityStateType)
 	@Column
-	public MonsterStateTypeId: number;
+	public EntityStateTypeId: number;
 	@BelongsTo(() => EntityStateType)
 	public EntityStateType: EntityStateType;
 
