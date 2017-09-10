@@ -76,13 +76,15 @@ router.post("/register", function(req, res, next) {
 			} else {
 				console.log("New user");
 				var key = require("crypto").pbkdf2Sync(req.body.password, "NaCL" /* TODO: Better salting */, 30000, 512, "sha512");
-				User.create({
-					UserName: req.body.username,
-					Password: key,
-					AccountType: eAccountType.User
-				}).then(function(newUser: User){
-					req.flash("error", "Created new user!");
-					res.redirect("/");
+				User.findAll().then(function(users) {
+					User.create({
+						UserName: req.body.username,
+						Password: key,
+						AccountType: (users.length === 0) ? eAccountType.Admin : eAccountType.User // If there are no other users then make this user an admin
+					}).then(function(newUser: User){
+						req.flash("error", "Created new user!");
+						res.redirect("/");
+					});
 				});
 			}
 		});
