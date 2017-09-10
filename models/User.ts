@@ -10,9 +10,6 @@ export default class User extends Model<User> {
 	@Column
 	public AccountType: eAccountType;
 
-	@ForeignKey(() => ItemInventory)
-	@Column
-	public ItemInventoryId: number;
 	@HasMany(() => ItemInventory)
 	public ItemInventory: ItemInventory;
 

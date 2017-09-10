@@ -9,8 +9,8 @@
 	<small id="passwordHelp" class="form-text text-muted">The user's password. Leave blank to leave password unchanged.</small>
 </div>
 <div class="form-group">
-	<label for="inputAccountType">Account Type</label><br>
-	<select class="custom-select" aria-describedby="accountTypeHelp">
+	<label for="inputAccountType">Account Type</label>
+	<select id="inputAccountType" class="custom-select" aria-describedby="accountTypeHelp">
 		<option value="0" <%= (data) ? ((data.AccountType == 0) ? "selected" : "") : ""  %>>User</option>
 		<option value="1" <%= (data) ? ((data.AccountType == 1) ? "selected" : "") : ""  %>>Admin</option>
 	</select>
