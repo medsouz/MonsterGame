@@ -1,0 +1,40 @@
+<div class="form-group">
+	<label for="inputEffectName">Effect Name</label>
+	<input type="text" class="form-control" id="inputEffectName"
+			aria-describedby="effectNameHelp" placeholder="Enter Effect Name"
+			value="<%= (data) ? data.effectName : ""  %>">
+	<small id="effectNameHelp" class="form-text text-muted">Effect Name</small>
+</div>
+<div class="form-group">
+	<label for="inputEffectDuration">Effect Duration</label>
+	<input type="text" class="form-control" id="inputEffectDuration"
+			aria-describedby="effectDurationHelp" placeholder="Enter Effect Duration"
+			value="<%= (data) ? data.effectDuration : ""  %>">
+	<small id="effectDurationHelp" class="form-text text-muted">Effect Duration</small>
+</div>
+<div class="form-group">
+	<label for="inputEffectOffset">Effect Offset</label>
+	<input type="text" class="form-control" id="inputEffectOffset"
+			aria-describedby="effectOffsetHelp" placeholder="Enter Effect Offset"
+			value="<%= (data) ? data.effectOffset : ""  %>">
+	<small id="effectOffsetHelp" class="form-text text-muted">Effect Offset</small>
+</div>
+<div class="form-group">
+	<label for="inputEffectFlag">Effect Flag</label><br>
+	<select class="custom-select" aria-describedby="effectFlagHelp">
+		<option value="0" <%= (data) ? ((data.EffectFlag == 0) ? "selected" : "") : ""  %>>Add</option>
+		<option value="1" <%= (data) ? ((data.EffectFlag == 1) ? "selected" : "") : ""  %>>Percent</option>
+	</select>
+	<small id="effectFlagHelp" class="form-text text-muted">Effect Flag</small>
+</div>
+<div class="form-group">
+	<label for="inputEntityStateType">Entity State Type</label><br>
+	<select class="custom-select" aria-describedby="entityStateTypeHelp">
+		<option value="0" <%= (data) ? ((data.EntityStateType == 0) ? "selected" : "") : ""  %>>entityStateType1</option>
+		<option value="1" <%= (data) ? ((data.EntityStateType == 1) ? "selected" : "") : ""  %>>entityStateType2</option>
+		<option value="2" <%= (data) ? ((data.EntityStateType == 2) ? "selected" : "") : ""  %>>entityStateType3</option>
+		<option value="3" <%= (data) ? ((data.EntityStateType == 3) ? "selected" : "") : ""  %>>entityStateType4</option>
+
+	</select>
+	<small id="entityStateTypeHelp" class="form-text text-muted">Entity State Type</small>
+</div>

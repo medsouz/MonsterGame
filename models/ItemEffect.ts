@@ -6,6 +6,8 @@ import Item from "./Item";
 export default class ItemEffect extends Model<ItemEffect> {
 
 	@Column
+	public EffectName: string;
+	@Column
 	public Duration: number;
 	@Column
 	public Offset: number;
