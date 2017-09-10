@@ -1,6 +1,6 @@
 import {Table, Column, Model, BelongsTo, ForeignKey} from "sequelize-typescript";
 import Item from "./Item";
-import Monster from "./Monster";
+import Entity from "./Entity";
 
 @Table
 export default class ActiveItem extends Model<ActiveItem> {
@@ -16,7 +16,7 @@ export default class ActiveItem extends Model<ActiveItem> {
 	@BelongsTo(() => Item)
 	public Item: Item;
 
-	@ForeignKey(() => Monster)
+	@ForeignKey(() => Entity)
 	@Column
-	public MonsterId: number;
+	public EntityId: number;
 }

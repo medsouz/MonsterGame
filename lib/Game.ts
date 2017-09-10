@@ -1,10 +1,10 @@
-import Monster from "../models/Monster";
+import Entity from "../models/Entity";
 import User from "../models/User";
 import Item from "../models/Item";
 
-export default class MonsterGame {
+export default class Game {
 
-public monsters: Monster[];
+public entities: Entity[];
 public user: User;
 public item: Item[];
 

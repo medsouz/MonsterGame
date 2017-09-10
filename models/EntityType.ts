@@ -1,7 +1,7 @@
 import {Table, Column, Model} from "sequelize-typescript";
 
 @Table
-export default class MonsterType extends Model<MonsterType> {
+export default class EntityType extends Model<EntityType> {
 
 	@Column
 	public PictureID: string;

@@ -1,11 +1,11 @@
 import {Table, Column, Model, HasMany, BelongsTo, ForeignKey} from "sequelize-typescript";
 import User from "./User";
-import MonsterType from "./MonsterType";
-import MonsterStateValue from "./MonsterStateValue";
+import EntityType from "./EntityType";
+import EntityStateValue from "./EntityStateValue";
 import ActiveItem from "./ActiveItem";
 
 @Table
-export default class Monster extends Model<Monster> {
+export default class Entity extends Model<Entity> {
 
 	@Column
 	public Name: string;
@@ -16,14 +16,14 @@ export default class Monster extends Model<Monster> {
 	@BelongsTo(() => User)
 	public User: User;
 
-	@ForeignKey(() => MonsterType)
+	@ForeignKey(() => EntityType)
 	@Column
-	public MonsterTypeId: number;
-	@BelongsTo(() => MonsterType)
-	public MonsterType: MonsterType;
+	public EntityTypeId: number;
+	@BelongsTo(() => EntityType)
+	public EntityType: EntityType;
 
-	@HasMany(() => MonsterStateValue)
-	public MonsterStateValue: MonsterStateValue;
+	@HasMany(() => EntityStateValue)
+	public EntityStateValue: EntityStateValue;
 
 	@HasMany(() => ActiveItem)
 	public ActiveItem: ActiveItem;

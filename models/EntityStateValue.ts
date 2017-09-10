@@ -1,24 +1,20 @@
 import {Table, Column, Model, BelongsTo, ForeignKey} from "sequelize-typescript";
 import EntityStateType from "./EntityStateType";
-import Item from "./Item";
+import Entity from "./Entity";
 
 @Table
-export default class ItemEffect extends Model<ItemEffect> {
+export default class EntityStateValue extends Model<EntityStateValue> {
 
 	@Column
-	public Duration: number;
-	@Column
-	public Offset: number;
-	@Column
-	public Flag: string;
+	public Value: number;
 
-	@ForeignKey(() => Item)
+	@ForeignKey(() => Entity)
 	@Column
-	public ItemId: number;
+	public EntityId: number;
 
 	@ForeignKey(() => EntityStateType)
 	@Column
-	public MonsterStateTypeId: number;
+	public EntityStateTypeId: number;
 	@BelongsTo(() => EntityStateType)
 	public EntityStateType: EntityStateType;
 
