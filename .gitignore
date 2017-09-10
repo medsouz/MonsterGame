@@ -36,6 +36,9 @@ build/Release
 node_modules/
 jspm_packages/
 
+# Ignore package-lock.json due to instability
+package-lock.json
+
 # Typescript v1 declaration files
 typings/
 
