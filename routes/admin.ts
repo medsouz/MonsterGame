@@ -97,30 +97,31 @@ router.get("/new/:type", function(req, res, next) {
 	}
 });
 
-router.get("/edit/:type/:id", function(req, res, next) {
-	var dbClass;
-	switch (req.params.type) {
+function getDBClassFromType(type: string) {
+	switch (type) {
 		case "user":
-			dbClass = User;
-			break;
+			return User;
 		case "item":
-			dbClass = Item;
-			break;
+			return Item;
 		case "itemeffect":
-			dbClass = ItemEffect;
-			break;
+			return ItemEffect;
 		case "itemslot":
-			dbClass = ItemSlot;
-			break;
+			return ItemSlot;
 		case "entitytype":
-			dbClass = EntityType;
-			break;
+			return EntityType;
 		case "entitystatetype":
-			dbClass = EntityStateType;
-			break;
+			return EntityStateType;
 		default:
-			res.redirect("/admin");
-			return;
+			return undefined;
+	}
+}
+
+router.get("/edit/:type/:id", function(req, res, next) {
+	var dbClass = getDBClassFromType(req.params.type);
+
+	if (dbClass === undefined) {
+		res.redirect("/admin");
+		return;
 	}
 
 	dbClass.findOne({
@@ -138,25 +139,35 @@ router.get("/edit/:type/:id", function(req, res, next) {
 });
 
 function handleFormPost(type: string, data: any): Promise<any> {
-	console.log(data);
+	var dbClass = getDBClassFromType(type);
+
+	if (dbClass === undefined)
+		return new Promise(function(resolve) { resolve(); });
+
+	var dbData: any = {};
+
 	switch (type) {
 		case "itemslot":
-			if (data.id === undefined) {
-				return ItemSlot.create({
-					Name: data.name
-				});
-			} else {
-				return ItemSlot.update(
-					{Name: data.name },
-					{where: { id: data.id }}
-				);
-			}
+			dbData.Name = data.name;
+			break;
+		case "user":
+			dbData.UserName = data.username;
+			dbData.Account = data.accountType;
+			if (data.password)
+				dbData.Password = require("crypto").pbkdf2Sync(data.password, "NaCL" /* TODO: Better salting */, 30000, 512, "sha512");
+			break;
 		default:
 			return new Promise(function(resolve) { resolve(); });
 	}
+
+	if (data.id === undefined)
+		return dbClass.create(dbData);
+	else
+		return dbClass.update(dbData, {where: { id: data.id }});
 }
 
 router.post("/new/:type", function(req, res, next) {
+	req.body.id = undefined;
 	handleFormPost(req.params.type, req.body).then(function() {
 		res.redirect("/admin");
 	});
