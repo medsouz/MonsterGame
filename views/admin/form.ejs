@@ -1,5 +1,5 @@
-<h1><%= (locals.data) ? "Editing" : "New"%> <%= type.charAt(0).toUpperCase() + type.slice(1); %></h1>
-<form>
+<h1><%= (locals.data) ? "Editing" : "New" %> <%= type.charAt(0).toUpperCase() + type.slice(1); %></h1>
+<form action="/admin/<%= (locals.data) ? "edit" : "new" %>/<%= (locals.data) ? type + "/" + data.id : type %>" method="post">
 	<%- include("forms/" + type, { data: locals.data, formData: locals.formData }); %>
 	<button type="submit" class="btn btn-success"><%= (locals.data) ? "Update" : "Add"%></button>
 </form>

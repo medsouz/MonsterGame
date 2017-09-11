@@ -5,4 +5,8 @@ export default class ItemSlot extends Model<ItemSlot> {
 
 	@Column
 	public Name: string;
+
+	public toString = (): string => {
+		return this.Name;
+	}
 }

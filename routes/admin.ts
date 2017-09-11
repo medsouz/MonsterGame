@@ -50,17 +50,32 @@ function createFormData(type: string): Promise<any> {
 				});
 			});
 			break;
-		case "itemeffect":
-		case "itemslot":
-		case "entitytype":
-		case "entitystatetype":
-		case "user":
 		default:
 			formData = new Promise(function(resolve) { resolve(); });
 			break;
 	}
 
 	return formData;
+}
+
+function getClassFromType(type: string) {
+	var dbClass;
+	switch (type) {
+		case "user":
+			return User;
+		case "item":
+			return Item;
+		case "itemeffect":
+			return ItemEffect;
+		case "itemslot":
+			return ItemSlot;
+		case "entitytype":
+			return EntityType;
+		case "entitystatetype":
+			return EntityStateType;
+		default:
+			return undefined;
+	}
 }
 
 router.get("/new/:type", function(req, res, next) {
@@ -119,6 +134,38 @@ router.get("/edit/:type/:id", function(req, res, next) {
 			else
 				res.redirect("/admin");
 		});
+	});
+});
+
+function handleFormPost(type: string, data: any): Promise<any> {
+	console.log(data);
+	switch (type) {
+		case "itemslot":
+			if (data.id === undefined) {
+				return ItemSlot.create({
+					Name: data.name
+				});
+			} else {
+				return ItemSlot.update(
+					{Name: data.name },
+					{where: { id: data.id }}
+				);
+			}
+		default:
+			return new Promise(function(resolve) { resolve(); });
+	}
+}
+
+router.post("/new/:type", function(req, res, next) {
+	handleFormPost(req.params.type, req.body).then(function() {
+		res.redirect("/admin");
+	});
+});
+
+router.post("/edit/:type/:id", function(req, res, next) {
+	req.body.id = req.params.id;
+	handleFormPost(req.params.type, req.body).then(function() {
+		res.redirect("/admin");
 	});
 });
 
