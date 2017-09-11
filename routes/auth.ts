@@ -47,7 +47,10 @@ passport.use(new LocalStrategy(
 
 /* GET login page. */
 router.get("/login", function(req, res, next) {
-	res.render("auth/login", { messages: req.flash("error") });
+	if (req.user)
+		res.redirect("/");
+	else
+		res.render("auth/login", { messages: req.flash("error") });
 });
 
 /* POST login page. */
@@ -61,7 +64,10 @@ router.get("/logout", function(req, res, next) {
 
 /* GET register page. */
 router.get("/register", function(req, res, next) {
-	res.render("auth/register", { messages: req.flash("error") });
+	if (req.user)
+		res.redirect("/");
+	else
+		res.render("auth/register", { messages: req.flash("error") });
 });
 
 /* POST register page. */
