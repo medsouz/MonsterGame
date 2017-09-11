@@ -5,13 +5,12 @@ import Entity from "../models/Entity";
 let router = Router();
 
 router.get("/:id", function(req, res, next) {
-
 	Entity.findOne({
 		where: {
 			id: req.params.id
 		}
 	}).then(function(result){
-		if (req.params.id) {
+		if (result) {
 			res.render("entity", { entity: Entity});
 		} else {
 			res.redirect("/");
