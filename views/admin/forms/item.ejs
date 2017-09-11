@@ -8,12 +8,9 @@
 <div class="form-group">
 	<label for="inputItemSlot">Item Slot</label><br>
 	<select class="custom-select" aria-describedby="itemSlotHelp">
-		<option value="0" <%= (data) ? ((data.ItemSlot == 0) ? "selected" : "") : ""  %>>itemSlot1</option>
-		<option value="1" <%= (data) ? ((data.ItemSlot == 1) ? "selected" : "") : ""  %>>itemSlot2</option>
-		<option value="2" <%= (data) ? ((data.ItemSlot == 2) ? "selected" : "") : ""  %>>itemSlot3</option>
-		<option value="3" <%= (data) ? ((data.ItemSlot == 3) ? "selected" : "") : ""  %>>itemSlot4</option>
-		<option value="4" <%= (data) ? ((data.ItemSlot == 4) ? "selected" : "") : ""  %>>itemSlot5</option>
-		<option value="5" <%= (data) ? ((data.ItemSlot == 5) ? "selected" : "") : ""  %>>itemSlot6</option>
+		<% for(var s in formData.itemSlots) { %>
+			<option value="<%= formData.itemSlots[s].id %>" <%= (data) ? ((data.ItemSlot == formData.itemSlots[s].id) ? "selected" : "") : ""  %>><%= formData.itemSlots[s].Name %></option>
+		<% } %>
 	</select>
 	<small id="itemSlotHelp" class="form-text text-muted">Item Slot</small>
 </div>

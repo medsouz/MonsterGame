@@ -8,6 +8,7 @@ import ItemEffect from "../models/ItemEffect";
 import ItemSlot from "../models/ItemSlot";
 import * as path from "path";
 import {Model} from "sequelize-typescript";
+import * as Promise from "bluebird";
 var router = Router();
 
 // Only allow authenticated administrators onto admin panel
@@ -38,8 +39,31 @@ router.get("/", function(req, res, next) {
 	});
 });
 
+function createFormData(type: string): Promise<any> {
+	var formData;
+
+	switch (type) {
+		case "item":
+			formData = new Promise(function(resolve) {
+				ItemSlot.findAll().then(function(slots) {
+					resolve({itemSlots: slots});
+				});
+			});
+			break;
+		case "itemeffect":
+		case "itemslot":
+		case "entitytype":
+		case "entitystatetype":
+		case "user":
+		default:
+			formData = new Promise(function(resolve) { resolve(); });
+			break;
+	}
+
+	return formData;
+}
+
 router.get("/new/:type", function(req, res, next) {
-	console.log(req.params.type);
 	switch (req.params.type) {
 		case "user":
 		case "item":
@@ -47,11 +71,14 @@ router.get("/new/:type", function(req, res, next) {
 		case "itemslot":
 		case "entitytype":
 		case "entitystatetype":
-			res.render("admin/form", { user : req.user, type: req.params.type });
-			break;
+			createFormData(req.params.type).then(function(additionalData) {
+				console.log(additionalData);
+				res.render("admin/form", { user : req.user, type: req.params.type, formData: additionalData });
+			});
+			return;
 		default:
 			res.redirect("/admin");
-			break;
+			return;
 	}
 });
 
@@ -86,10 +113,12 @@ router.get("/edit/:type/:id", function(req, res, next) {
 			id: req.params.id
 		}
 	}).then(function(result){
-		if (result != null)
-			res.render("admin/form", { user : req.user, type: req.params.type, data: result });
-		else
-			res.redirect("/admin");
+		createFormData(req.params.type).then(function(additionalData) {
+			if (result != null)
+				res.render("admin/form", { user : req.user, type: req.params.type, data: result, formData: additionalData });
+			else
+				res.redirect("/admin");
+		});
 	});
 });
 
