@@ -30,10 +30,8 @@ passport.deserializeUser(function(userID, done) {
 
 passport.use(new LocalStrategy(
 	function(name, password, done) {
- 		var key = require("crypto").pbkdf2Sync(password, "NaCL" /* TODO: Better salting */, 30000, 512, "sha512");
-
 		User.findOne({
-			where: { UserName: name, Password: key }
+			where: { UserName: name, Password: User.hashPassword(password) }
 		}).then(function(user: User) {
 			console.log(user);
 			if (user != null) {
@@ -81,11 +79,10 @@ router.post("/register", function(req, res, next) {
 				res.redirect("/auth/register");
 			} else {
 				console.log("New user");
-				var key = require("crypto").pbkdf2Sync(req.body.password, "NaCL" /* TODO: Better salting */, 30000, 512, "sha512");
 				User.findAll().then(function(users) {
 					User.create({
 						UserName: req.body.username,
-						Password: key,
+						Password: User.hashPassword(req.body.password),
 						AccountType: (users.length === 0) ? eAccountType.Admin : eAccountType.User // If there are no other users then make this user an admin
 					}).then(function(newUser: User){
 						req.flash("error", "Created new user!");

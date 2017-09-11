@@ -154,7 +154,7 @@ function handleFormPost(type: string, data: any): Promise<any> {
 			dbData.UserName = data.username;
 			dbData.Account = data.accountType;
 			if (data.password)
-				dbData.Password = require("crypto").pbkdf2Sync(data.password, "NaCL" /* TODO: Better salting */, 30000, 512, "sha512");
+				dbData.Password = User.hashPassword(data.password);
 			break;
 		default:
 			return new Promise(function(resolve) { resolve(); });

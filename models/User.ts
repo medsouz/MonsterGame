@@ -3,6 +3,11 @@ import ItemInventory from "./ItemInventory";
 
 @Table
 export default class User extends Model<User> {
+
+	public static hashPassword(password: string): string {
+		return require("crypto").pbkdf2Sync(password, "NaCL" /* TODO: Better salting */, 30000, 512, "sha512");
+	}
+
 	@Column
 	public UserName: string;
 	@Column
