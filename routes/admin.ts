@@ -152,7 +152,7 @@ function handleFormPost(type: string, data: any): Promise<any> {
 			break;
 		case "user":
 			dbData.UserName = data.username;
-			dbData.Account = data.accountType;
+			dbData.AccountType = data.accountType;
 			if (data.password)
 				dbData.Password = User.hashPassword(data.password);
 			break;
