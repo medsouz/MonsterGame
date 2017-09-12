@@ -165,7 +165,7 @@ function handleFormPost(type: string, data: any): Promise<any> {
 		case "item":
 			dbData.Name = data.name;
 			dbData.ItemSlotId = data.itemSlot;
-			dbData.ItemEffect = data.effectID;
+			dbData.ItemEffectId = data.effectID;
 			break;
 		default:
 			return new Promise(function(resolve) { resolve(); });
