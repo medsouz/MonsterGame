@@ -11,6 +11,8 @@ export default class EntityStateType extends Model<EntityStateType> {
 	public MaxValue: number;
 	@Column
 	public MinValue: number;
+	@Column
+	public InitialValue: number;
 
 	public toString = (): string => {
 		return this.Name;

@@ -10,7 +10,10 @@ export default class Item extends Model<Item> {
 	@Column
 	public PictureId: string;
 
-	@HasMany(() => ItemEffect)
+	@ForeignKey(() => ItemEffect)
+	@Column
+	public ItemEffectId: number;
+	@BelongsTo(() => ItemEffect)
 	public ItemEffect: ItemEffect;
 
 	@ForeignKey(() => ItemSlot)

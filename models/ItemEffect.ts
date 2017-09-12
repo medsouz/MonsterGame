@@ -14,10 +14,6 @@ export default class ItemEffect extends Model<ItemEffect> {
 	@Column
 	public Flag: string;
 
-	@ForeignKey(() => Item)
-	@Column
-	public ItemId: number;
-
 	@ForeignKey(() => EntityStateType)
 	@Column
 	public EntityStateTypeId: number;

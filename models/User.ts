@@ -16,7 +16,7 @@ export default class User extends Model<User> {
 	public AccountType: eAccountType;
 
 	@HasMany(() => ItemInventory)
-	public ItemInventory: ItemInventory;
+	public ItemInventory: ItemInventory[];
 
 	public toString = (): string => {
 		return ((this.AccountType === eAccountType.Admin) ? "[ADMIN] " : "") + this.UserName;
