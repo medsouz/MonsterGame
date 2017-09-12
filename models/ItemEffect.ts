@@ -24,4 +24,7 @@ export default class ItemEffect extends Model<ItemEffect> {
 	@BelongsTo(() => EntityStateType)
 	public EntityStateType: EntityStateType;
 
+	public toString = (): string => {
+		return this.EffectName;
+	}
 }

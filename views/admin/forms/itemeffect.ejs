@@ -1,40 +1,38 @@
 <div class="form-group">
 	<label for="inputEffectName">Effect Name</label>
-	<input type="text" class="form-control" id="inputEffectName"
+	<input type="text" class="form-control" id="inputEffectName" name="effectName"
 			aria-describedby="effectNameHelp" placeholder="Enter Effect Name"
-			value="<%= (data) ? data.effectName : ""  %>">
+			value="<%= (data) ? data.EffectName : ""  %>">
 	<small id="effectNameHelp" class="form-text text-muted">Effect Name</small>
 </div>
 <div class="form-group">
 	<label for="inputEffectDuration">Effect Duration</label>
-	<input type="text" class="form-control" id="inputEffectDuration"
+	<input type="text" class="form-control" id="inputEffectDuration" name="effectDuration"
 			aria-describedby="effectDurationHelp" placeholder="Enter Effect Duration"
-			value="<%= (data) ? data.effectDuration : ""  %>">
+			value="<%= (data) ? data.Duration : ""  %>">
 	<small id="effectDurationHelp" class="form-text text-muted">Effect Duration</small>
 </div>
 <div class="form-group">
 	<label for="inputEffectOffset">Effect Offset</label>
-	<input type="text" class="form-control" id="inputEffectOffset"
+	<input type="text" class="form-control" id="inputEffectOffset" name="effectOffset"
 			aria-describedby="effectOffsetHelp" placeholder="Enter Effect Offset"
-			value="<%= (data) ? data.effectOffset : ""  %>">
+			value="<%= (data) ? data.Offset : ""  %>">
 	<small id="effectOffsetHelp" class="form-text text-muted">Effect Offset</small>
 </div>
 <div class="form-group">
 	<label for="inputEffectFlag">Effect Flag</label><br>
-	<select class="custom-select" aria-describedby="effectFlagHelp">
-		<option value="0" <%= (data) ? ((data.EffectFlag == 0) ? "selected" : "") : ""  %>>Add</option>
-		<option value="1" <%= (data) ? ((data.EffectFlag == 1) ? "selected" : "") : ""  %>>Percent</option>
+	<select class="custom-select" aria-describedby="effectFlagHelp" name="effectFlag">
+		<option value="0" <%= (data) ? ((data.Flag == 0) ? "selected" : "") : ""  %>>Add</option>
+		<option value="1" <%= (data) ? ((data.Flag == 1) ? "selected" : "") : ""  %>>Percent</option>
 	</select>
 	<small id="effectFlagHelp" class="form-text text-muted">Effect Flag</small>
 </div>
 <div class="form-group">
 	<label for="inputEntityStateType">Entity State Type</label><br>
-	<select class="custom-select" aria-describedby="entityStateTypeHelp">
-		<option value="0" <%= (data) ? ((data.EntityStateType == 0) ? "selected" : "") : ""  %>>entityStateType1</option>
-		<option value="1" <%= (data) ? ((data.EntityStateType == 1) ? "selected" : "") : ""  %>>entityStateType2</option>
-		<option value="2" <%= (data) ? ((data.EntityStateType == 2) ? "selected" : "") : ""  %>>entityStateType3</option>
-		<option value="3" <%= (data) ? ((data.EntityStateType == 3) ? "selected" : "") : ""  %>>entityStateType4</option>
-
+	<select class="custom-select" aria-describedby="entityStateTypeHelp" name="entityStateType">
+        <% for(var s in formData.entityStateTypes) { %>
+		<option value="<%= formData.entityStateTypes[s].id %>" <%= (data) ? ((data.EntityStateTypeID == formData.entityStateTypes[s].id) ? "selected" : "") : ""  %>><%= formData.entityStateTypes[s].Name %></option>
+        <% } %>
 	</select>
 	<small id="entityStateTypeHelp" class="form-text text-muted">Entity State Type</small>
 </div>

@@ -1,14 +1,14 @@
 <div class="form-group">
 	<label for="inputEntityDefaultName">Entity Default Name</label>
-	<input type="text" class="form-control" id="inputEntityDefaultName"
+	<input type="text" class="form-control" id="inputEntityDefaultName" name="defaultName"
 			aria-describedby="entityDefaultNameHelp" placeholder="Enter Entity Default Name"
-			value="<%= (data) ? data.entityDefaultName : ""  %>">
+			value="<%= (data) ? data.DefaultName : ""  %>">
 	<small id="entityDefaultNameHelp" class="form-text text-muted">Entity Default Name</small>
 </div>
 <div class="form-group">
 	<label for="inputEntityPictureId">Entity Picture ID</label>
-	<input type="text" class="form-control" id="inputEntityPictureId"
+	<input type="text" class="form-control" id="inputEntityPictureId" name="pictureID"
 			aria-describedby="entityPictureIdHelp" placeholder="Entity Picture ID"
-			value="<%= (data) ? data.entityPictureId : ""  %>">
+			value="<%= (data) ? data.PictureID : ""  %>">
 	<small id="entityPictureIdHelp" class="form-text text-muted">Entity Picture ID</small>
 </div>

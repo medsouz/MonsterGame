@@ -1,13 +1,13 @@
 <div class="form-group">
 	<label for="inputItemName">Item Name</label>
-	<input type="text" class="form-control" id="inputItemName"
+	<input type="text" class="form-control" id="inputItemName" name="name"
 			aria-describedby="itemNameHelp" placeholder="Enter Item Name"
-			value="<%= (data) ? data.itemName : ""  %>">
+			value="<%= (data) ? data.Name : ""  %>">
 	<small id="itemNameHelp" class="form-text text-muted">Item Name</small>
 </div>
 <div class="form-group">
 	<label for="inputItemSlot">Item Slot</label><br>
-	<select class="custom-select" aria-describedby="itemSlotHelp">
+	<select class="custom-select" aria-describedby="itemSlotHelp" name="itemSlot">
 		<% for(var s in formData.itemSlots) { %>
 			<option value="<%= formData.itemSlots[s].id %>" <%= (data) ? ((data.ItemSlot == formData.itemSlots[s].id) ? "selected" : "") : ""  %>><%= formData.itemSlots[s].Name %></option>
 		<% } %>
@@ -15,14 +15,11 @@
 	<small id="itemSlotHelp" class="form-text text-muted">Item Slot</small>
 </div>
 <div class="form-group">
-	<label for="inputItemEffects">Item Effects: can have multiple?</label><br>
-	<select class="custom-select" aria-describedby="itemEffectsHelp">
-		<option value="0" <%= (data) ? ((data.ItemEffects == 0) ? "selected" : "") : ""  %>>itemEffect1</option>
-		<option value="1" <%= (data) ? ((data.ItemEffects == 1) ? "selected" : "") : ""  %>>itemEffect</option>
-		<option value="2" <%= (data) ? ((data.ItemEffects == 2) ? "selected" : "") : ""  %>>itemEffect3</option>
-		<option value="3" <%= (data) ? ((data.ItemEffects == 3) ? "selected" : "") : ""  %>>itemEffect4</option>
-		<option value="4" <%= (data) ? ((data.ItemEffects == 4) ? "selected" : "") : ""  %>>itemEffect5</option>
-		<option value="5" <%= (data) ? ((data.ItemEffects == 5) ? "selected" : "") : ""  %>>itemEffect6</option>
+	<label for="inputItemEffects">Item Effects</label><br>
+	<select class="custom-select" aria-describedby="itemEffectsHelp" name="effectID">
+        <% for(var s in formData.itemEffects) { %>
+		<option value="<%= formData.itemEffects[s].id %>" <%= (data) ? ((data.ItemEffect == formData.itemEffects[s].id) ? "selected" : "") : ""  %>><%= formData.itemEffects[s].EffectName %></option>
+        <% } %>
 	</select>
-	<small id="itemEffectsHelp" class="form-text text-muted">Item Effects: can have multiple?</small>
+	<small id="itemEffectsHelp" class="form-text text-muted">Item Effects</small>
 </div>

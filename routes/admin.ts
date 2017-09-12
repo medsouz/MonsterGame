@@ -46,7 +46,17 @@ function createFormData(type: string): Promise<any> {
 		case "item":
 			formData = new Promise(function(resolve) {
 				ItemSlot.findAll().then(function(slots) {
-					resolve({itemSlots: slots});
+					ItemEffect.findAll().then(function(effects){
+						console.log(effects);
+						resolve({itemSlots: slots, itemEffects: effects});
+					});
+				});
+			});
+			break;
+		case "itemeffect":
+			formData = new Promise(function(resolve) {
+				EntityStateType.findAll().then(function(slots) {
+					resolve({entityStateTypes: slots});
 				});
 			});
 			break;
@@ -56,26 +66,6 @@ function createFormData(type: string): Promise<any> {
 	}
 
 	return formData;
-}
-
-function getClassFromType(type: string) {
-	var dbClass;
-	switch (type) {
-		case "user":
-			return User;
-		case "item":
-			return Item;
-		case "itemeffect":
-			return ItemEffect;
-		case "itemslot":
-			return ItemSlot;
-		case "entitytype":
-			return EntityType;
-		case "entitystatetype":
-			return EntityStateType;
-		default:
-			return undefined;
-	}
 }
 
 router.get("/new/:type", function(req, res, next) {
@@ -155,6 +145,27 @@ function handleFormPost(type: string, data: any): Promise<any> {
 			dbData.AccountType = data.accountType;
 			if (data.password)
 				dbData.Password = User.hashPassword(data.password);
+			break;
+		case "entitystatetype":
+			dbData.Name = data.inputEntityStateTypeName;
+			dbData.MaxValue = data.maxvalue;
+			dbData.MinValue = data.minvalue;
+			break;
+		case "entitytype":
+			dbData.DefaultName = data.defaultName;
+			dbData.PictureID = data.pictureID;
+			break;
+		case "itemeffect":
+			dbData.EffectName = data.effectName;
+			dbData.Duration = data.effectDuration;
+			dbData.Offset = data.effectOffset;
+			dbData.Flag = data.effectFlag;
+			dbData.EntityStateType = data.entityStateType;
+			break;
+		case "item":
+			dbData.Name = data.name;
+			dbData.ItemSlotId = data.itemSlot;
+			dbData.ItemEffect = data.effectID;
 			break;
 		default:
 			return new Promise(function(resolve) { resolve(); });
