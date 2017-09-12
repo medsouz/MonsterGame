@@ -9,6 +9,8 @@ import ItemSlot from "../models/ItemSlot";
 import * as path from "path";
 import {Model} from "sequelize-typescript";
 import * as Promise from "bluebird";
+import EntityStateValue from "../models/EntityStateValue";
+import Entity from "../models/Entity";
 var router = Router();
 
 // Only allow authenticated administrators onto admin panel
@@ -60,6 +62,13 @@ function createFormData(type: string): Promise<any> {
 				});
 			});
 			break;
+		case "entity":
+			formData = new Promise(function(resolve) {
+				EntityType.findAll().then(function(slots) {
+					resolve({entityTypes: slots});
+				});
+			});
+			break;
 		default:
 			formData = new Promise(function(resolve) { resolve(); });
 			break;
@@ -70,6 +79,7 @@ function createFormData(type: string): Promise<any> {
 
 router.get("/new/:type", function(req, res, next) {
 	switch (req.params.type) {
+		case "entity":
 		case "user":
 		case "item":
 		case "itemeffect":
@@ -179,15 +189,48 @@ function handleFormPost(type: string, data: any): Promise<any> {
 
 router.post("/new/:type", function(req, res, next) {
 	req.body.id = undefined;
-	handleFormPost(req.params.type, req.body).then(function() {
-		res.redirect("/admin");
-	});
+	switch ( req.params.type ) {
+		case "entity":
+			newEntity(req.body, req.user.id).then(function() {
+				res.redirect("/edit/user/" + req.user.id);
+			});
+			break;
+		default:
+			handleFormPost(req.params.type, req.body).then(function() {
+				res.redirect("/admin");
+			});
+	}
+
 });
+
+function newEntity(data: any, userId: string): Promise<any> {
+	EntityStateType.findAll().then(function(slots) {
+		// resolve({entityStateTypes: slots});
+		let dbData: any = {};
+		dbData.Name = data.name;
+		dbData.UserId = userId;
+		dbData.EntityTypeId = data.entityTypes;
+		Entity.create(dbData).then(function(data) {
+			let newEntity:any = data;
+
+			for ( let i of slots) {
+				dbData = {};
+				dbData.Value = 0;
+				dbData.EntityId = newEntity.id;
+				dbData.EntityStateType = i.id;
+				EntityStateValue.create(dbData);
+			}
+
+			return new Promise(function(resolve) { resolve(); });
+		});
+	});
+};
 
 router.post("/edit/:type/:id", function(req, res, next) {
 	req.body.id = req.params.id;
 	handleFormPost(req.params.type, req.body).then(function() {
-		res.redirect("/admin");
+		if ( req.params.type === "entity") res.redirect("/edit/user/" + req.user.id);
+		else res.redirect("/admin");
 	});
 });
 
