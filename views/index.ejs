@@ -3,11 +3,12 @@
 
 <div class="container">
 	<div class="row">
-		<% for(var i = 0; i < 12; i++) { %>
+		<% for(var v in entityList) { %>
 		<div class="col-sm-3">
-			<a href="/entity/10">
-				<img src="/img/monster/<%= Math.floor(Math.random() * 20) %><%= ["A", "B", "C"][Math.floor(Math.random() * 3)] %>.png" style="width:100%;height:100%"></img>
+			<a href="/entity/<%= entityList[v].id %>">
+				<img src="/img/monster/<%= entityList[v].EntityType.PictureID %>.png" style="width:100%"></img>
 			</a>
+			<span>Name: <%= entityList[v].Name %> | Type: <%= entityList[v].EntityType.DefaultName %></span>
 		</div>
 		<% } %>
 	</div>

@@ -150,6 +150,7 @@ function handleFormPost(type: string, data: any): Promise<any> {
 			dbData.Name = data.inputEntityStateTypeName;
 			dbData.MaxValue = data.maxValue;
 			dbData.MinValue = data.minValue;
+			dbData.InitialValue = data.initialValue;
 			break;
 		case "entitytype":
 			dbData.DefaultName = data.defaultName;

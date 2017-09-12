@@ -23,7 +23,7 @@ export default class Entity extends Model<Entity> {
 	public EntityType: EntityType;
 
 	@HasMany(() => EntityStateValue)
-	public EntityStateValue: EntityStateValue;
+	public EntityStateValues: EntityStateValue[];
 
 	@HasMany(() => ActiveItem)
 	public ActiveItem: ActiveItem;
