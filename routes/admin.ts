@@ -192,7 +192,7 @@ router.post("/new/:type", function(req, res, next) {
 	req.body.id = undefined;
 	switch ( req.params.type ) {
 		case "entity":
-			newEntity(req.body, req.user.id).then(function() {
+			createNewEntity(req.body, req.user.id).then(function() {
 				res.redirect("/edit/user/" + req.user.id);
 			});
 			break;
@@ -204,16 +204,14 @@ router.post("/new/:type", function(req, res, next) {
 
 });
 
-function newEntity(data: any, userId: string): Promise<any> {
-	EntityStateType.findAll().then(function(slots) {
+function createNewEntity(data: any, userId: string): Promise<any> {
+	return EntityStateType.findAll().then(function(slots) {
 		// resolve({entityStateTypes: slots});
 		let dbData: any = {};
 		dbData.Name = data.name;
 		dbData.UserId = userId;
 		dbData.EntityTypeId = data.entityTypes;
-		Entity.create(dbData).then(function(data) {
-			let newEntity:any = data;
-
+		return Entity.create(dbData).then(function(newEntity) {
 			for ( let i of slots) {
 				dbData = {};
 				dbData.Value = 0;
@@ -225,7 +223,7 @@ function newEntity(data: any, userId: string): Promise<any> {
 			return new Promise(function(resolve) { resolve(); });
 		});
 	});
-};
+}
 
 router.post("/edit/:type/:id", function(req, res, next) {
 	req.body.id = req.params.id;
