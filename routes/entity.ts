@@ -15,14 +15,12 @@ router.use(function(req, res, next) {
 });
 
 router.get("/:id", function(req, res, next) {
-	Entity.findOne({ where: { id: req.params.id }, include: [ EntityType, EntityStateValue ]}).then(function(result){
-		EntityStateType.findAll().then(function(entityStateTypes) {
-			if (result) {
-				res.render("entity", { entity: result, stateTypes: entityStateTypes, user: req.user });
-			} else {
-				res.redirect("/");
-			}
-		});
+	Entity.findByIdAndUpdate(req.params.id).then(function(result: Entity) {
+		if (result) {
+			res.render("entity", { entity: result, user: req.user });
+		} else {
+			res.redirect("/");
+		}
 	});
 });
 module.exports = router;
