@@ -41,7 +41,7 @@ router.get("/", function(req, res, next) {
 	});
 });
 
-function createFormData(type: string): Promise<any> {
+function createFormData(type: string, id?: number): Promise<any> {
 	var formData;
 
 	switch (type) {
@@ -65,9 +65,24 @@ function createFormData(type: string): Promise<any> {
 		case "entity":
 			formData = new Promise(function(resolve) {
 				EntityType.findAll().then(function(slots) {
-					resolve({entityTypes: slots});
+					resolve({entityTypes: slots, userId: id /* HACK: Only set when /new/ */});
 				});
 			});
+			break;
+		case "user":
+			// Wrap in a function to keep data in scope
+			var getFormData = function(userId: any) {
+				return new Promise(function(resolve) {
+					if (userId !== undefined) {
+						Entity.findAllByUserId(userId).then(function(entities: Entity[]) {
+							resolve({entityList: entities});
+						});
+					} else {
+						resolve({entityList: []});
+					}
+				});
+			};
+			formData = getFormData(id);
 			break;
 		default:
 			formData = new Promise(function(resolve) { resolve(); });
@@ -77,7 +92,7 @@ function createFormData(type: string): Promise<any> {
 	return formData;
 }
 
-router.get("/new/:type", function(req, res, next) {
+router.get("/new/:type/:id?", function(req, res, next) {
 	switch (req.params.type) {
 		case "entity":
 		case "user":
@@ -86,8 +101,7 @@ router.get("/new/:type", function(req, res, next) {
 		case "itemslot":
 		case "entitytype":
 		case "entitystatetype":
-			createFormData(req.params.type).then(function(additionalData) {
-				console.log(additionalData);
+			createFormData(req.params.type, req.params.id).then(function(additionalData) {
 				res.render("admin/form", { user : req.user, type: req.params.type, formData: additionalData });
 			});
 			return;
@@ -111,6 +125,8 @@ function getDBClassFromType(type: string) {
 			return EntityType;
 		case "entitystatetype":
 			return EntityStateType;
+		case "entity":
+			return Entity;
 		default:
 			return undefined;
 	}
@@ -129,7 +145,7 @@ router.get("/edit/:type/:id", function(req, res, next) {
 			id: req.params.id
 		}
 	}).then(function(result){
-		createFormData(req.params.type).then(function(additionalData) {
+		createFormData(req.params.type, req.params.id).then(function(additionalData) {
 			if (result != null)
 				res.render("admin/form", { user : req.user, type: req.params.type, data: result, formData: additionalData });
 			else
@@ -178,6 +194,12 @@ function handleFormPost(type: string, data: any): Promise<any> {
 			dbData.ItemSlotId = data.itemSlot;
 			dbData.ItemEffectId = data.effectID;
 			break;
+		case "entity":
+			dbData.Name = data.name;
+			dbData.EntityTypeId = data.entityType;
+			if (data.userId)
+				dbData.UserId = data.userId;
+			break;
 		default:
 			return new Promise(function(resolve) { resolve(); });
 	}
@@ -190,45 +212,17 @@ function handleFormPost(type: string, data: any): Promise<any> {
 
 router.post("/new/:type", function(req, res, next) {
 	req.body.id = undefined;
-	switch ( req.params.type ) {
-		case "entity":
-			createNewEntity(req.body, req.user.id).then(function() {
-				res.redirect("/edit/user/" + req.user.id);
-			});
-			break;
-		default:
-			handleFormPost(req.params.type, req.body).then(function() {
-				res.redirect("/admin");
-			});
-	}
+	handleFormPost(req.params.type, req.body).then(function() {
+		if ( req.params.type === "entity") res.redirect("/admin/edit/user/" + req.user.id);
+		else res.redirect("/admin");
+	});
 
 });
-
-function createNewEntity(data: any, userId: string): Promise<any> {
-	return EntityStateType.findAll().then(function(slots) {
-		// resolve({entityStateTypes: slots});
-		let dbData: any = {};
-		dbData.Name = data.name;
-		dbData.UserId = userId;
-		dbData.EntityTypeId = data.entityTypes;
-		return Entity.create(dbData).then(function(newEntity) {
-			for ( let i of slots) {
-				dbData = {};
-				dbData.Value = 0;
-				dbData.EntityId = newEntity.id;
-				dbData.EntityStateType = i.id;
-				EntityStateValue.create(dbData);
-			}
-
-			return new Promise(function(resolve) { resolve(); });
-		});
-	});
-}
 
 router.post("/edit/:type/:id", function(req, res, next) {
 	req.body.id = req.params.id;
 	handleFormPost(req.params.type, req.body).then(function() {
-		if ( req.params.type === "entity") res.redirect("/edit/user/" + req.user.id);
+		if ( req.params.type === "entity") res.redirect("/admin/edit/user/" + req.user.id);
 		else res.redirect("/admin");
 	});
 });

@@ -1,16 +1,19 @@
 <div class="form-group">
+    <% if(!data) {%>
+    <input type="hidden" name="userId" value="<%= formData.userId %>">
+    <% } %>
     <label for="inputEntityDefaultName">Name</label>
-    <input type="text" class="form-control" id="inputEntityDefaultName" name="Name"
+    <input type="text" class="form-control" id="inputEntityDefaultName" name="name"
            aria-describedby="entityDefaultNameHelp" placeholder="Enter Entity Name"
            value="<%= (data) ? data.Name : ""  %>">
     <small id="entityDefaultNameHelp" class="form-text text-muted">The name of the entity</small>
 </div>
 <div class="form-group">
-    <label for="inputEntityStateType">Entity Type</label><br>
-    <select class="custom-select" aria-describedby="entityStateTypeHelp" name="type">
+	<label for="inputEntityType">Entity Type</label><br>
+	<select class="custom-select" aria-describedby="entityTypeHelp" name="entityType">
         <% for(var s in formData.entityTypes) { %>
-        <option value="<%= formData.entityTypes[s].id %>" <%= (data) ? ((data.EntityType == formData.entityStates[s].id) ? "selected" : "") : ""  %>><%= formData.entityTypes[s].DefaultName %></option>
+		<option value="<%= formData.entityTypes[s].id %>" <%= (data) ? ((data.EntityType == formData.entityTypes[s].id) ? "selected" : "") : ""  %>><%= formData.entityTypes[s].DefaultName %></option>
         <% } %>
-    </select>
-    <small id="entityStateTypeHelp" class="form-text text-muted">Entity State Type</small>
+	</select>
+	<small id="entityTypeHelp" class="form-text text-muted">Entity Type</small>
 </div>

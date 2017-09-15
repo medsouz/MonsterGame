@@ -17,6 +17,12 @@ export default class Entity extends Model<Entity> {
 		});
 	}
 
+	public static findAllByUserId(userId: number) {
+		return Entity.findAll({where: {UserId: userId}, include: [EntityType, {model: EntityStateValue, include: [EntityStateType]}]}).then(function(entities: Entity[]) {
+			return entities;
+		});
+	}
+
 	@Column
 	public Name: string;
 
@@ -40,5 +46,9 @@ export default class Entity extends Model<Entity> {
 
 	public updateValues(): Promise<any> {
 		return new Promise(function(resolve) { resolve(); });
+	}
+
+	public toString = (): string => {
+		return this.Name;
 	}
 }

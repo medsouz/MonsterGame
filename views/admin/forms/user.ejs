@@ -16,6 +16,16 @@
 	</select>
 	<small id="accountTypeHelp" class="form-text text-muted">The user's account type.</small>
 </div>
-
-<%- include("../partials/entity"); %>
-<br/>
+<% if (data) { %>
+	<h3>Entities</h3>
+	<a href="/admin/new/entity/<%= user.id %>">Add New</a>
+	<table class="table table-striped">
+		<% for(var d in	formData.entityList) { %>
+		<tr>
+			<td><a href="/admin/edit/entity/<%= formData.entityList[d]["id"] %>"><%= formData.entityList[d] %></a></td>
+		</tr>
+		<% } %>
+	</table>
+<% } else { %>
+	<i>Entities can be added in the update view</i>
+<% } %>
