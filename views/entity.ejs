@@ -5,6 +5,7 @@
 		</div>
 		<div class="col-sm-4">
 			<h3><%= entity.Name %></h3>
+			<a href="/entity/<%= entity.id %>/rename">Rename</a>
 			<table class="table table-striped">
 				<tr>
 					<th>State</th>
@@ -20,6 +21,7 @@
 		</div>
 		<div class="col-sm-4">
 			<h3>Items</h3>
+			<a href="/entity/<%= entity.id %>/inventory">Inventory</a>
 			<table class="table table-striped">
 				<tr>
 					<th>Item</th>
