@@ -1,35 +1,21 @@
-<div id="wrapper">
-	<div>
-		<div>
-
-			<h2>Login</h2>
-
-			<form action="/auth/login" method="post">
-
-			<div class="form-group col-lg-4 ">
-				<label for="username">Username</label>
-				<input id="username" name="username" class="form-control" type="text"/>
-			</div>
-
-			<br/>
-
-			<div class="form-group col-lg-4 ">
-				<label for="password">Password</label>
-				<input id="password" name="password" class="form-control" type="password"/>
-			</div>
-
-			<br/>
-
-			<button type="submit" class="btn btn-success">Login</button>
-			<a class="btn btn-primary" href="/auth/register">Sign Up</a>
-
-			</form>
-
-			<br/><br/>
-            <% if (messages.length > 0) { %>
-				<div class="alert alert-danger"><%= messages %></div>
-            <% } %>
-
+<div class="container">
+	<h2 class="text-center">Login</h2>
+	<form action="/auth/login" method="post">
+		<div class="form-group">
+			<label for="username">Username</label>
+			<input id="username" name="username" class="form-control" type="text"/>
 		</div>
-	</div>
+		<br/>
+		<div class="form-group">
+			<label for="password">Password</label>
+			<input id="password" name="password" class="form-control" type="password"/>
+		</div>
+		<br/>
+		<button type="submit" class="btn btn-success">Login</button>
+		<a class="btn btn-primary" href="/auth/register">Sign Up</a>
+	</form>
+	<br/><br/>
+    <% if (messages.length > 0) { %>
+		<div class="alert alert-danger"><%= messages %></div>
+    <% } %>
 </div>
