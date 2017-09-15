@@ -19,7 +19,8 @@
         "no-console": false,
         "curly": false,
         "align": false,
-        "max-line-length": false
+        "max-line-length": false,
+        "forin": false
     },
     "rulesDirectory": []
 }

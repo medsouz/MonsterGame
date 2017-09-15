@@ -10,6 +10,8 @@ export default class ItemEffect extends Model<ItemEffect> {
 	@Column
 	public Duration: number;
 	@Column
+	public Interval: number;
+	@Column
 	public Offset: number;
 	@Column
 	public Flag: string;

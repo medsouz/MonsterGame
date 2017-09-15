@@ -1,19 +1,37 @@
 <div class="container">
 	<div class="row">
-		<% for(var v in entity.EntityStateValues) { %>
-		<div class="col-sm-3">
-			<p><%= entity.EntityStateValues[v].EntityStateType.Name %>: <%= entity.EntityStateValues[v].Value %></p>
+		<div class="col-sm-4">
+			<img src="/img/monster/<%= entity.EntityType.PictureID %>.png" style="width:100%;"></img>
 		</div>
-		<% } %>
-	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-3">
-				<img src="/img/monster/<%= entity.EntityType.PictureID %>.png" style="width:100%;"></img>
-			</div>
-			<div class="col-sm-3">
-				<p><%= entity.Name %></p>
-			</div>
+		<div class="col-sm-4">
+			<h3><%= entity.Name %></h3>
+			<table class="table table-striped">
+				<tr>
+					<th>State</th>
+					<th>Value</th>
+				</tr>
+				<% for(var v in entity.EntityStateValues) { %>
+				<tr>
+					<td><%= entity.EntityStateValues[v].EntityStateType.Name %></td>
+					<td><%= entity.EntityStateValues[v].Value %></td>
+				</tr>
+				<% } %>
+			</table>
+		</div>
+		<div class="col-sm-4">
+			<h3>Items</h3>
+			<table class="table table-striped">
+				<tr>
+					<th>Item</th>
+					<th>Slot</th>
+				</tr>
+				<% for(var a in entity.ActiveItems) { %>
+				<tr>
+					<td><%= entity.ActiveItems[a].Item.Name %></td>
+					<td><%= entity.ActiveItems[a].Item.ItemSlot.Name %></td>
+				</tr>
+				<% } %>
+			</table>
 		</div>
 	</div>
 </div>

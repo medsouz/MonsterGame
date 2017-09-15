@@ -17,5 +17,4 @@ export default class EntityStateValue extends Model<EntityStateValue> {
 	public EntityStateTypeId: number;
 	@BelongsTo(() => EntityStateType)
 	public EntityStateType: EntityStateType;
-
 }

@@ -13,6 +13,13 @@
 	<small id="effectDurationHelp" class="form-text text-muted">Effect Duration</small>
 </div>
 <div class="form-group">
+	<label for="inputEffectInterval">Effect Interval</label>
+	<input type="text" class="form-control" id="inputEffectInterval" name="effectInterval"
+			aria-describedby="effectIntervalHelp" placeholder="Enter Effect Duration"
+			value="<%= (data) ? data.Interval : ""  %>">
+	<small id="effectIntervalHelp" class="form-text text-muted">Effect Interval</small>
+</div>
+<div class="form-group">
 	<label for="inputEffectOffset">Effect Offset</label>
 	<input type="text" class="form-control" id="inputEffectOffset" name="effectOffset"
 			aria-describedby="effectOffsetHelp" placeholder="Enter Effect Offset"

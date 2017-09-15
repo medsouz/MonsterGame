@@ -49,7 +49,6 @@ function createFormData(type: string, id?: number): Promise<any> {
 			formData = new Promise(function(resolve) {
 				ItemSlot.findAll().then(function(slots) {
 					ItemEffect.findAll().then(function(effects){
-						console.log(effects);
 						resolve({itemSlots: slots, itemEffects: effects});
 					});
 				});
@@ -185,6 +184,7 @@ function handleFormPost(type: string, data: any): Promise<any> {
 		case "itemeffect":
 			dbData.EffectName = data.effectName;
 			dbData.Duration = data.effectDuration;
+			dbData.Interval = data.effectInterval;
 			dbData.Offset = data.effectOffset;
 			dbData.Flag = data.effectFlag;
 			dbData.EntityStateType = data.entityStateType;
@@ -199,6 +199,19 @@ function handleFormPost(type: string, data: any): Promise<any> {
 			dbData.EntityTypeId = data.entityType;
 			if (data.userId)
 				dbData.UserId = data.userId;
+			if (data.id === undefined) {
+				return Entity.create(dbData).then(function(entity: Entity) {
+					return EntityStateType.findAll().then(function(stateTypes: EntityStateType[]) {
+						return Promise.each(stateTypes, function(stateType: EntityStateType) {
+							return EntityStateValue.create({
+								Value: stateType.InitialValue,
+								EntityId: entity.id,
+								EntityStateTypeId: stateType.id
+							});
+						});
+					});
+				});
+			}
 			break;
 		default:
 			return new Promise(function(resolve) { resolve(); });

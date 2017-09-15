@@ -6,9 +6,9 @@ import Entity from "./Entity";
 export default class ActiveItem extends Model<ActiveItem> {
 
 	@Column
-	public StartTime: Date;
+	public Started: Date;
 	@Column
-	public EndTime: string;
+	public LastUpdated: Date;
 
 	@ForeignKey(() => Item)
 	@Column
