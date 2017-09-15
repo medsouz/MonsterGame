@@ -1,7 +1,5 @@
 <div class="form-group">
-    <% if(!data) {%>
-    <input type="hidden" name="userId" value="<%= formData.userId %>">
-    <% } %>
+    <input type="hidden" name="userId" value="<%= (data) ? data.UserId : formData.userId %>">
     <label for="inputEntityDefaultName">Name</label>
     <input type="text" class="form-control" id="inputEntityDefaultName" name="name"
            aria-describedby="entityDefaultNameHelp" placeholder="Enter Entity Name"

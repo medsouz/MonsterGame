@@ -18,7 +18,7 @@
 </div>
 <% if (data) { %>
 	<h3>Entities</h3>
-	<a href="/admin/new/entity/<%= user.id %>">Add New</a>
+	<a href="/admin/new/entity/<%= data.id %>">Add New</a>
 	<table class="table table-striped">
 		<% for(var d in	formData.entityList) { %>
 		<tr>
@@ -28,4 +28,5 @@
 	</table>
 <% } else { %>
 	<i>Entities can be added in the update view</i>
+	<br>
 <% } %>

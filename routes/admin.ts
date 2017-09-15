@@ -226,7 +226,7 @@ function handleFormPost(type: string, data: any): Promise<any> {
 router.post("/new/:type", function(req, res, next) {
 	req.body.id = undefined;
 	handleFormPost(req.params.type, req.body).then(function() {
-		if ( req.params.type === "entity") res.redirect("/admin/edit/user/" + req.user.id);
+		if (req.params.type === "entity") res.redirect("/admin/edit/user/" + req.body.userId);
 		else res.redirect("/admin");
 	});
 
@@ -235,7 +235,7 @@ router.post("/new/:type", function(req, res, next) {
 router.post("/edit/:type/:id", function(req, res, next) {
 	req.body.id = req.params.id;
 	handleFormPost(req.params.type, req.body).then(function() {
-		if ( req.params.type === "entity") res.redirect("/admin/edit/user/" + req.user.id);
+		if (req.params.type === "entity") res.redirect("/admin/edit/user/" + req.body.userId);
 		else res.redirect("/admin");
 	});
 });

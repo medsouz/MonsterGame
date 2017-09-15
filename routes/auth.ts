@@ -33,7 +33,6 @@ passport.use(new LocalStrategy(
 		User.findOne({
 			where: { UserName: name, Password: User.hashPassword(password) }
 		}).then(function(user: User) {
-			console.log(user);
 			if (user != null) {
 				done(null, user);
 			} else {
