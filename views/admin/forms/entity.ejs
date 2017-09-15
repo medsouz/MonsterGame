@@ -12,7 +12,7 @@
 	<label for="inputEntityType">Entity Type</label><br>
 	<select class="custom-select" aria-describedby="entityTypeHelp" name="entityType">
         <% for(var s in formData.entityTypes) { %>
-		<option value="<%= formData.entityTypes[s].id %>" <%= (data) ? ((data.EntityType == formData.entityTypes[s].id) ? "selected" : "") : ""  %>><%= formData.entityTypes[s].DefaultName %></option>
+		<option value="<%= formData.entityTypes[s].id %>" <%= (data) ? ((data.EntityTypeId == formData.entityTypes[s].id) ? "selected" : "") : ""  %>><%= formData.entityTypes[s].DefaultName %></option>
         <% } %>
 	</select>
 	<small id="entityTypeHelp" class="form-text text-muted">Entity Type</small>
