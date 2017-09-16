@@ -31,7 +31,8 @@ passport.deserializeUser(function(userID, done) {
 passport.use(new LocalStrategy(
 	function(name, password, done) {
 		User.findOne({
-			where: { UserName: name, Password: User.hashPassword(password) }
+			where: [Sequelize.where(Sequelize.fn("lower", Sequelize.col("UserName")), Sequelize.fn("lower", name)),
+			{ password: User.hashPassword(password) }]
 		}).then(function(user: User) {
 			if (user != null) {
 				done(null, user);
@@ -71,7 +72,7 @@ router.get("/register", function(req, res, next) {
 router.post("/register", function(req, res, next) {
 	if (req.body.username.match("^[A-Za-z0-9_]{3,20}$") && req.body.password === req.body.confirmPassword) {
 		User.findOne({
-			where: { UserName: req.body.username }
+			where: Sequelize.where(Sequelize.fn("lower", Sequelize.col("UserName")), Sequelize.fn("lower", req.body.username))
 		}).then(function(existingUser: User) {
 			if (existingUser != null) {
 				req.flash("error", "Username is already in use");
