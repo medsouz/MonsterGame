@@ -9,7 +9,7 @@
 	<label for="inputItemSlot">Item Slot</label><br>
 	<select class="custom-select" aria-describedby="itemSlotHelp" name="itemSlot">
 		<% for(var s in formData.itemSlots) { %>
-			<option value="<%= formData.itemSlots[s].id %>" <%= (data) ? ((data.ItemSlot == formData.itemSlots[s].id) ? "selected" : "") : ""  %>><%= formData.itemSlots[s].Name %></option>
+			<option value="<%= formData.itemSlots[s].id %>" <%= (data) ? ((data.ItemSlotId == formData.itemSlots[s].id) ? "selected" : "") : ""  %>><%= formData.itemSlots[s].Name %></option>
 		<% } %>
 	</select>
 	<small id="itemSlotHelp" class="form-text text-muted">Item Slot</small>
@@ -18,7 +18,7 @@
 	<label for="inputItemEffects">Item Effects</label><br>
 	<select class="custom-select" aria-describedby="itemEffectsHelp" name="effectID">
         <% for(var s in formData.itemEffects) { %>
-		<option value="<%= formData.itemEffects[s].id %>" <%= (data) ? ((data.ItemEffect == formData.itemEffects[s].id) ? "selected" : "") : ""  %>><%= formData.itemEffects[s].EffectName %></option>
+		<option value="<%= formData.itemEffects[s].id %>" <%= (data) ? ((data.ItemEffectId == formData.itemEffects[s].id) ? "selected" : "") : ""  %>><%= formData.itemEffects[s].EffectName %></option>
         <% } %>
 	</select>
 	<small id="itemEffectsHelp" class="form-text text-muted">Item Effects</small>
