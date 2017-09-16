@@ -14,11 +14,7 @@ import * as Promise from "bluebird";
 export default class Entity extends Model<Entity> {
 
 	public static findByIdAndUpdate(entityId: number) {
-		return Entity.findOne({where: {id: entityId}, include: [
-			EntityType,
-			{model: EntityStateValue, include: [EntityStateType]},
-			{model: ActiveItem, include: [{model: Item, include: [ItemEffect, ItemSlot]}]}
-		]}).then(function(entity: Entity) {
+		return Entity.findOne({where: {id: entityId}, include: Entity.getQueryInclude()}).then(function(entity: Entity) {
 			return entity.updateValues().then(function() {
 				return entity;
 			});
@@ -26,13 +22,17 @@ export default class Entity extends Model<Entity> {
 	}
 
 	public static findAllByUserId(userId: number) {
-		return Entity.findAll({where: {UserId: userId}, include: [
+		return Entity.findAll({where: {UserId: userId}, include: Entity.getQueryInclude()}).then(function(entities: Entity[]) {
+			return entities;
+		});
+	}
+
+	public static getQueryInclude() {
+		return [
 			EntityType,
 			{model: EntityStateValue, include: [EntityStateType]},
 			{model: ActiveItem, include: [{model: Item, include: [ItemEffect, ItemSlot]}]}
-		]}).then(function(entities: Entity[]) {
-			return entities;
-		});
+		];
 	}
 
 	@Column
@@ -57,8 +57,10 @@ export default class Entity extends Model<Entity> {
 	public ActiveItems: ActiveItem[];
 
 	public updateValues(): Promise<any> {
+		var updates: any = {};
 		for (var i in this.ActiveItems) {
-			console.log(this.ActiveItems[i].Item.Name + " in " + this.ActiveItems[i].Item.ItemSlot.Name);
+			console.log(this.ActiveItems[i].Item.Name + " in " + this.ActiveItems[i].Item.ItemSlot.Name + " has effect: " + this.ActiveItems[i].Item.ItemEffect.EffectName);
+
 		}
 		return this.update({});
 	}

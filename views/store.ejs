@@ -1,0 +1,18 @@
+<div class="container">
+	<div class="row">
+		<% for(var i in items) { %>
+		<div class="col-sm-3">
+			<img src="/img/item/<%= items[i].PictureId %>.png" style="width:100%"></img>
+			<span>Item: <%= items[i].Name %> | Count: <%= items[i].Count %></span>
+			<form action="/store/purchase/<%= items[i].id %>" method="post">
+				<div class="input-group">
+					<input type="number" class="form-control" name="quantity">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="submit">Purchase</button>
+					</span>
+				</div>
+			</form>
+		</div>
+		<% } %>
+	</div>
+</div>

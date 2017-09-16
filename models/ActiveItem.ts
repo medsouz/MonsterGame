@@ -19,4 +19,8 @@ export default class ActiveItem extends Model<ActiveItem> {
 	@ForeignKey(() => Entity)
 	@Column
 	public EntityId: number;
+
+	public getRemainingTime() {
+		return (this.Started.getTime() + this.Item.ItemEffect.Duration) - Date.now();
+	}
 }

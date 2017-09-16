@@ -1,22 +1,17 @@
-<div class="row">
-	<nav class="col-sm-3 col-md-2 bg-light sidebar">
-		<div>Status Updates:<br>NEWS NEWS NEWS<br>NEWS!!!!</div>
-	</nav>
-	<main class="col-sm-9 ml-sm-auto col-md-10" role="main">
-		<h1>Index</h1>
-		<p>Placeholder</p>
+<main class="container" role="main">
+	<h1>Index</h1>
+	<p>Placeholder</p>
 
-		<div class="container">
-			<div class="row">
-				<% for(var v in entityList) { %>
-				<div class="col-sm-3">
-					<a href="/entity/<%= entityList[v].id %>">
-						<img src="/img/monster/<%= entityList[v].EntityType.PictureID %>.png" style="width:100%"></img>
-					</a>
-					<span>Name: <%= entityList[v].Name %> | Type: <%= entityList[v].EntityType.DefaultName %></span>
-				</div>
-				<% } %>
+	<div class="container">
+		<div class="row">
+			<% for(var v in entityList) { %>
+			<div class="col-sm-3">
+				<a href="/entity/<%= entityList[v].id %>">
+					<img src="/img/monster/<%= entityList[v].EntityType.PictureID %>.png" style="width:100%"></img>
+				</a>
+				<span>Name: <%= entityList[v].Name %> | Type: <%= entityList[v].EntityType.DefaultName %></span>
 			</div>
+			<% } %>
 		</div>
-	</main>
-</div>
+	</div>
+</main>

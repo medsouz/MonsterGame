@@ -197,10 +197,11 @@ function handleFormPost(type: string, data: any): Promise<any> {
 			dbData.Interval = data.effectInterval;
 			dbData.Offset = data.effectOffset;
 			dbData.Flag = data.effectFlag;
-			dbData.EntityStateType = data.entityStateType;
+			dbData.EntityStateTypeId = data.entityStateType;
 			break;
 		case "item":
 			dbData.Name = data.name;
+			dbData.PictureId = data.pictureId;
 			dbData.ItemSlotId = data.itemSlot;
 			dbData.ItemEffectId = data.effectID;
 			break;

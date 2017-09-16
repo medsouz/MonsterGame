@@ -38,7 +38,7 @@
 	<label for="inputEntityStateType">Entity State Type</label><br>
 	<select class="custom-select" aria-describedby="entityStateTypeHelp" name="entityStateType">
         <% for(var s in formData.entityStateTypes) { %>
-		<option value="<%= formData.entityStateTypes[s].id %>" <%= (data) ? ((data.EntityStateTypeID == formData.entityStateTypes[s].id) ? "selected" : "") : ""  %>><%= formData.entityStateTypes[s].Name %></option>
+		<option value="<%= formData.entityStateTypes[s].id %>" <%= (data) ? ((data.EntityStateTypeId == formData.entityStateTypes[s].id) ? "selected" : "") : ""  %>><%= formData.entityStateTypes[s].Name %></option>
         <% } %>
 	</select>
 	<small id="entityStateTypeHelp" class="form-text text-muted">Entity State Type</small>

@@ -6,6 +6,13 @@
 	<small id="itemNameHelp" class="form-text text-muted">Item Name</small>
 </div>
 <div class="form-group">
+	<label for="inputItemPicture">Picture ID</label>
+	<input type="text" class="form-control" id="inputItemPicture" name="pictureId"
+			aria-describedby="itemPictureHelp" placeholder="Enter Picture ID"
+			value="<%= (data) ? data.PictureId : ""  %>">
+	<small id="itemPictureHelp" class="form-text text-muted">PictureID</small>
+</div>
+<div class="form-group">
 	<label for="inputItemSlot">Item Slot</label><br>
 	<select class="custom-select" aria-describedby="itemSlotHelp" name="itemSlot">
 		<% for(var s in formData.itemSlots) { %>

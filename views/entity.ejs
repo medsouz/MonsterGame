@@ -5,35 +5,62 @@
 		</div>
 		<div class="col-sm-4">
 			<h3><%= entity.Name %></h3>
-			<a href="/entity/<%= entity.id %>/rename">Rename</a>
 			<table class="table table-striped">
 				<tr>
 					<th>State</th>
 					<th>Value</th>
+					<th>Change</th>
 				</tr>
 				<% for(var v in entity.EntityStateValues) { %>
 				<tr>
 					<td><%= entity.EntityStateValues[v].EntityStateType.Name %></td>
 					<td><%= entity.EntityStateValues[v].Value %></td>
+					<td>+0</td>
 				</tr>
 				<% } %>
 			</table>
 		</div>
 		<div class="col-sm-4">
 			<h3>Items</h3>
-			<a href="/entity/<%= entity.id %>/inventory">Inventory</a>
 			<table class="table table-striped">
 				<tr>
 					<th>Item</th>
 					<th>Slot</th>
+					<th>Time Remaining</th>
 				</tr>
 				<% for(var a in entity.ActiveItems) { %>
 				<tr>
 					<td><%= entity.ActiveItems[a].Item.Name %></td>
 					<td><%= entity.ActiveItems[a].Item.ItemSlot.Name %></td>
+					<td><span style="margin-right: 5px"><%= entity.ActiveItems[a].getRemainingTime() %></span><a class="btn btn-primary" href="/entity/<%= entity.id %>/item/remove/<%= entity.ActiveItems[a].id %>">Remove</a></td>
 				</tr>
 				<% } %>
 			</table>
 		</div>
+	</div>
+	<div class="row">
+		<h3>Inventory</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Icon</th>
+				<th>Name</th>
+				<th>Effect</th>
+				<th>State</th>
+				<th>Modifier</th>
+				<th>Quantity</th>
+				<th>Action</th>
+			</tr>
+			<% for(var i in inventory) { %>
+			<tr>
+				<td><img src="/img/item/<%= inventory[i].Item.PictureId %>.png" style="width:32px"></img></td>
+				<td><%= inventory[i].Item.Name %></td>
+				<td><%= inventory[i].Item.ItemEffect.EffectName %></td>
+				<td><%= inventory[i].Item.ItemEffect.EntityStateType.Name %></td>
+				<td><%= inventory[i].Item.ItemEffect.Offset %></td>
+				<td><%= inventory[i].Count %></td>
+				<td><a class="btn btn-primary" href="/entity/<%= entity.id %>/item/give/<%= inventory[i].Item.id %>">Give</a></td>
+			</tr>
+			<% } %>
+		</table>
 	</div>
 </div>
