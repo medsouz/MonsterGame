@@ -14,9 +14,12 @@ import * as Promise from "bluebird";
 export default class Entity extends Model<Entity> {
 
 	public static findByIdAndUpdate(entityId: number) {
-		return Entity.findOne({where: {id: entityId}, include: Entity.getQueryInclude()}).then(function(entity: Entity) {
-			return entity.updateValues().then(function() {
-				return entity;
+		return Entity.findOne({where: {id: entityId}, include: Entity.getQueryInclude()}).then(function(e: Entity) {
+			return e.updateValues().then(function(values) {
+				// HACK: Reload the entity to show the updated values. Need to optimize
+				return Entity.findOne({where: {id: entityId}, include: Entity.getQueryInclude()}).then(function(eUpdated: Entity) {
+					return {entity: eUpdated, updated: values};
+				});
 			});
 		});
 	}
@@ -57,12 +60,43 @@ export default class Entity extends Model<Entity> {
 	public ActiveItems: ActiveItem[];
 
 	public updateValues(): Promise<any> {
-		var updates: any = {};
-		for (var i in this.ActiveItems) {
-			console.log(this.ActiveItems[i].Item.Name + " in " + this.ActiveItems[i].Item.ItemSlot.Name + " has effect: " + this.ActiveItems[i].Item.ItemEffect.EffectName);
+		var update = function(ActiveItems: ActiveItem[], EntityStateValues: EntityStateValue[]) {
+			var updates: any = {};
+			return Promise.each(ActiveItems, function(activeItem) {
+				var now = Date.now();
+				var ends = activeItem.Item.ItemEffect.Duration + activeItem.Started.getTime();
+				if (now > ends)
+					now = ends;
+				var lastUpdate = now - activeItem.LastUpdated.getTime();
+				var timesApplied = Math.floor(lastUpdate / activeItem.Item.ItemEffect.Interval);
+				var modified = timesApplied * activeItem.Item.ItemEffect.Offset;
+				var nowClean = activeItem.LastUpdated.getTime() + activeItem.Item.ItemEffect.Interval * timesApplied;
+				console.log(activeItem.Item.Name + " in " + activeItem.Item.ItemSlot.Name + " has effect: " + activeItem.Item.ItemEffect.EffectName + " | Time Since Last Update: " + lastUpdate + ", applied " + timesApplied + " times" + " Last Update: " + nowClean + " (Real: " + now + ") | Dead: " + (nowClean >= ends));
+				updates[activeItem.Item.ItemEffect.EntityStateTypeId] = modified;
 
-		}
-		return this.update({});
+				var action: Promise<any>;
+				if (nowClean >= ends)
+					action = activeItem.destroy();
+				else
+					action = activeItem.update({LastUpdated: nowClean});
+
+				var wrap = function(act: Promise<any>, actItem: ActiveItem, mod: number) {
+					return action.then(function() {
+						for (var e in EntityStateValues) {
+							if (EntityStateValues[e].EntityStateTypeId === actItem.Item.ItemEffect.EntityStateTypeId) {
+								return EntityStateValues[e].update({Value: EntityStateValues[e].Value + mod}).then(function() {
+									return; // It is expecting an undefined return
+								});
+							}
+						}
+					});
+				};
+				return wrap(action, activeItem, modified);
+			}).then(function() {
+				return updates;
+			});
+		};
+		return update(this.ActiveItems, this.EntityStateValues);
 	}
 
 	public toString = (): string => {

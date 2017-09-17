@@ -15,7 +15,13 @@
 				<tr>
 					<td><%= entity.EntityStateValues[v].EntityStateType.Name %></td>
 					<td><%= entity.EntityStateValues[v].Value %></td>
-					<td>+0</td>
+					<td>
+						<% if(updated[entity.EntityStateValues[v].EntityStateType.id] !== undefined) { %>
+							<span style="color: <%= (updated[entity.EntityStateValues[v].EntityStateType.id] > -1) ? "green" : "red" %>"><%= (updated[entity.EntityStateValues[v].EntityStateType.id] > -1) ? "+" : "" %><%= updated[entity.EntityStateValues[v].EntityStateType.id] %></span>
+						<% } else { %>
+							<span>0</span>
+						<% } %>
+					</td>
 				</tr>
 				<% } %>
 			</table>
@@ -47,6 +53,8 @@
 				<th>Effect</th>
 				<th>State</th>
 				<th>Modifier</th>
+				<th>Interval</th>
+				<th>Duration</th>
 				<th>Quantity</th>
 				<th>Action</th>
 			</tr>
@@ -57,6 +65,8 @@
 				<td><%= inventory[i].Item.ItemEffect.EffectName %></td>
 				<td><%= inventory[i].Item.ItemEffect.EntityStateType.Name %></td>
 				<td><%= inventory[i].Item.ItemEffect.Offset %></td>
+				<td><%= inventory[i].Item.ItemEffect.Interval %></td>
+				<td><%= inventory[i].Item.ItemEffect.Duration %></td>
 				<td><%= inventory[i].Count %></td>
 				<td><a class="btn btn-primary" href="/entity/<%= entity.id %>/item/give/<%= inventory[i].Item.id %>">Give</a></td>
 			</tr>

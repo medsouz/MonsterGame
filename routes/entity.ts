@@ -20,10 +20,10 @@ router.use(function(req, res, next) {
 });
 
 router.get("/:id", function(req, res, next) {
-	Entity.findByIdAndUpdate(req.params.id).then(function(result: Entity) {
-		if (result) {
+	Entity.findByIdAndUpdate(req.params.id).then(function(result) {
+		if (result.entity) {
 			ItemInventory.findAll({where: {UserId: req.user.id, Count: {$gt: 0}}, include: [{model: Item, include: [ItemSlot, {model: ItemEffect, include: [EntityStateType]}]}]}).then(function(itemInventory: ItemInventory[]) {
-				res.render("entity", { entity: result, inventory: itemInventory, user: req.user });
+				res.render("entity", { entity: result.entity, updated: result.updated, inventory: itemInventory, user: req.user });
 			});
 		} else {
 			res.redirect("/");
