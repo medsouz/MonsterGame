@@ -33,7 +33,7 @@ router.get("/:id", function(req, res, next) {
 
 router.get("/:id/interact", function(req, res, next) {
 	Entity.findByIdAndUpdate(req.params.id).then(function(result) {
-		if (result.entity && (60000 - (Date.now() - result.entity.LastInteract.getTime()) > 0)) {
+		if (result.entity && (60000 - (Date.now() - result.entity.LastInteract.getTime()) < 0)) {
 			EntityStateValue.findOne({where: {EntityId: result.entity.id, EntityStateTypeId: 1}, include: [EntityStateType]}).then(function(entityStateValue: EntityStateValue) {
 				var newValue = entityStateValue.Value + 10;
 				if (newValue > entityStateValue.EntityStateType.MaxValue)
@@ -41,14 +41,14 @@ router.get("/:id/interact", function(req, res, next) {
 				if (newValue < entityStateValue.EntityStateType.MinValue)
 					newValue = entityStateValue.EntityStateType.MinValue;
 
-				if (newValue !== entityStateValue.Value)
-					entityStateValue.update({Value: newValue}).then(function() {
-						result.entity.update({LastInteract: Date.now()}).then(function() {
+				result.entity.update({LastInteract: Date.now()}).then(function() {
+					if (newValue !== entityStateValue.Value)
+						entityStateValue.update({Value: newValue}).then(function() {
 							res.redirect("/entity/" + req.params.id);
 						});
-					});
-				else
-					res.redirect("/entity/" + req.params.id);
+					else
+						res.redirect("/entity/" + req.params.id);
+				});
 			});
 		} else {
 			res.redirect("/");
