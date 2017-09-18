@@ -98,7 +98,31 @@ export default class Entity extends Model<Entity> {
 				};
 				return wrap(action, activeItem, modified);
 			}).then(function() {
-				return updates;
+				return Promise.each(EntityStateValues, function(entityStateValue) {
+					var now = Date.now();
+					var lastUpdate = now - entityStateValue.LastDecay.getTime();
+					var timesApplied = Math.floor(lastUpdate / entityStateValue.EntityStateType.DecayInterval);
+					var modified = timesApplied * entityStateValue.EntityStateType.DecayAmount;
+					var nowClean = entityStateValue.LastDecay.getTime() + entityStateValue.EntityStateType.DecayInterval * timesApplied;
+
+					var newValue = entityStateValue.Value + modified;
+					if (newValue > entityStateValue.EntityStateType.MaxValue)
+						newValue = entityStateValue.EntityStateType.MaxValue;
+					if (newValue < entityStateValue.EntityStateType.MinValue)
+						newValue = entityStateValue.EntityStateType.MinValue;
+
+					if (entityStateValue.Value === newValue)
+						return new Promise(function(resolve) { resolve(); });
+
+					if (updates[entityStateValue.EntityStateTypeId])
+						updates[entityStateValue.EntityStateTypeId] += modified;
+					else
+						updates[entityStateValue.EntityStateTypeId] = modified;
+
+					return entityStateValue.update({Value: newValue, LastDecay: nowClean});
+				}).then(function() {
+					return updates;
+				});
 			});
 		};
 		return update(this.ActiveItems, this.EntityStateValues);

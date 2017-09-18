@@ -13,6 +13,10 @@ export default class EntityStateType extends Model<EntityStateType> {
 	public MinValue: number;
 	@Column
 	public InitialValue: number;
+	@Column
+	public DecayInterval: number;
+	@Column
+	public DecayAmount: number;
 
 	public toString = (): string => {
 		return this.Name;

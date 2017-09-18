@@ -176,17 +176,21 @@ function handleFormPost(type: string, data: any): Promise<any> {
 			dbData.MaxValue = data.maxValue;
 			dbData.MinValue = data.minValue;
 			dbData.InitialValue = data.initialValue;
-			return EntityStateType.create(dbData).then(function(stateType: EntityStateType) {
-				return Entity.findAll().then(function(entities: Entity[]) {
-					return Promise.each(entities, function(entity: Entity) {
-						return EntityStateValue.create({
-							Value: stateType.InitialValue,
-							EntityId: entity.id,
-							EntityStateTypeId: stateType.id
+			dbData.DecayInterval = data.decayInterval;
+			dbData.DecayAmount = data.decayAmount;
+			if (data.id === undefined)
+				return EntityStateType.create(dbData).then(function(stateType: EntityStateType) {
+					return Entity.findAll().then(function(entities: Entity[]) {
+						return Promise.each(entities, function(entity: Entity) {
+							return EntityStateValue.create({
+								Value: stateType.InitialValue,
+								LastDecay: Date.now(),
+								EntityId: entity.id,
+								EntityStateTypeId: stateType.id
+							});
 						});
 					});
 				});
-			});
 		case "entitytype":
 			dbData.DefaultName = data.defaultName;
 			dbData.PictureID = data.pictureID;

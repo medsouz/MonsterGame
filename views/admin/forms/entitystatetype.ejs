@@ -26,3 +26,17 @@
 			value="<%= (data) ? data.InitialValue : ""  %>">
 	<small id="initialValueHelp" class="form-text text-muted">Initial Value</small>
 </div>
+<div class="form-group">
+	<label for="inputDecayInterval">Decay Interval</label>
+	<input type="text" class="form-control" id="inputDecayInterval" name="decayInterval"
+			aria-describedby="decayIntervalHelp" placeholder="Decay Interval"
+			value="<%= (data) ? data.DecayInterval : ""  %>">
+	<small id="decayIntervalHelp" class="form-text text-muted">Decay Interval</small>
+</div>
+<div class="form-group">
+	<label for="inputDecayAmount">Decay Amount</label>
+	<input type="text" class="form-control" id="inputDecayAmount" name="decayAmount"
+			aria-describedby="decayAmountHelp" placeholder="Amount Interval"
+			value="<%= (data) ? data.DecayAmount : ""  %>">
+	<small id="decayAmountHelp" class="form-text text-muted">Decay Amount</small>
+</div>

@@ -7,6 +7,8 @@ export default class EntityStateValue extends Model<EntityStateValue> {
 
 	@Column
 	public Value: number;
+	@Column
+	public LastDecay: Date;
 
 	@ForeignKey(() => Entity)
 	@Column
