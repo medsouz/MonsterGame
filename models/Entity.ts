@@ -34,7 +34,7 @@ export default class Entity extends Model<Entity> {
 		return [
 			EntityType,
 			{model: EntityStateValue, include: [EntityStateType]},
-			{model: ActiveItem, include: [{model: Item, include: [ItemEffect, ItemSlot]}]}
+			{model: ActiveItem, include: [{model: Item, include: [{model: ItemEffect, include: [EntityStateType]}, ItemSlot]}]}
 		];
 	}
 
@@ -84,7 +84,12 @@ export default class Entity extends Model<Entity> {
 					return action.then(function() {
 						for (var e in EntityStateValues) {
 							if (EntityStateValues[e].EntityStateTypeId === actItem.Item.ItemEffect.EntityStateTypeId) {
-								return EntityStateValues[e].update({Value: EntityStateValues[e].Value + mod}).then(function() {
+								var newValue = EntityStateValues[e].Value + mod;
+								if (newValue > actItem.Item.ItemEffect.EntityStateType.MaxValue)
+									newValue = actItem.Item.ItemEffect.EntityStateType.MaxValue;
+								if (newValue < actItem.Item.ItemEffect.EntityStateType.MinValue)
+									newValue = actItem.Item.ItemEffect.EntityStateType.MinValue;
+								return EntityStateValues[e].update({Value: newValue}).then(function() {
 									return; // It is expecting an undefined return
 								});
 							}
