@@ -215,11 +215,13 @@ function handleFormPost(type: string, data: any): Promise<any> {
 			if (data.userId)
 				dbData.UserId = data.userId;
 			if (data.id === undefined) {
+				dbData.LastInteract = Date.now();
 				return Entity.create(dbData).then(function(entity: Entity) {
 					return EntityStateType.findAll().then(function(stateTypes: EntityStateType[]) {
 						return Promise.each(stateTypes, function(stateType: EntityStateType) {
 							return EntityStateValue.create({
 								Value: stateType.InitialValue,
+								LastDecay: Date.now(),
 								EntityId: entity.id,
 								EntityStateTypeId: stateType.id
 							});

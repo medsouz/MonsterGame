@@ -40,6 +40,8 @@ export default class Entity extends Model<Entity> {
 
 	@Column
 	public Name: string;
+	@Column
+	public LastInteract: Date;
 
 	@ForeignKey(() => User)
 	@Column

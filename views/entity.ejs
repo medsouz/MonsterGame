@@ -2,6 +2,7 @@
 	<div class="row">
 		<div class="col-sm-4">
 			<img src="/img/monster/<%= entity.EntityType.PictureID %>.png" style="width:100%;"></img>
+			<%= 60000 - (Date.now() - entity.LastInteract.getTime()) %><a class="btn btn-primary <%= (60000 - (Date.now() - entity.LastInteract.getTime()) > 0) ? "disabled" : "" %>" href="/entity/<%= entity.id %>/interact %>">Interact</a>
 		</div>
 		<div class="col-sm-4">
 			<h3><%= entity.Name %></h3>

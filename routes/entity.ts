@@ -31,6 +31,31 @@ router.get("/:id", function(req, res, next) {
 	});
 });
 
+router.get("/:id/interact", function(req, res, next) {
+	Entity.findByIdAndUpdate(req.params.id).then(function(result) {
+		if (result.entity && (60000 - (Date.now() - result.entity.LastInteract.getTime()) > 0)) {
+			EntityStateValue.findOne({where: {EntityId: result.entity.id, EntityStateTypeId: 1}, include: [EntityStateType]}).then(function(entityStateValue: EntityStateValue) {
+				var newValue = entityStateValue.Value + 10;
+				if (newValue > entityStateValue.EntityStateType.MaxValue)
+					newValue = entityStateValue.EntityStateType.MaxValue;
+				if (newValue < entityStateValue.EntityStateType.MinValue)
+					newValue = entityStateValue.EntityStateType.MinValue;
+
+				if (newValue !== entityStateValue.Value)
+					entityStateValue.update({Value: newValue}).then(function() {
+						result.entity.update({LastInteract: Date.now()}).then(function() {
+							res.redirect("/entity/" + req.params.id);
+						});
+					});
+				else
+					res.redirect("/entity/" + req.params.id);
+			});
+		} else {
+			res.redirect("/");
+		}
+	});
+});
+
 router.get("/:id/item/give/:itemID", function(req, res, next) {
 	Entity.findOne({where: {id: req.params.id, UserId: req.user.id}}).then(function(result: Entity) {
 		if (result) {
