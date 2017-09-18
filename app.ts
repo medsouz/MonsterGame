@@ -15,11 +15,11 @@ import * as cookieParser from "cookie-parser";
 import * as logger from "morgan";
 // file system paths - standard node library
 import * as path from "path";
-
+// session storage and tracking
 import * as session from "express-session";
-
+// sending messages between pages
 import flash = require("connect-flash");
-
+// user authentication
 import * as passport from "passport";
 
 // sql object relation mapping:

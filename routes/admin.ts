@@ -23,8 +23,6 @@ router.use(function(req, res, next) {
 
 /* GET admin home page. */
 router.get("/", function(req, res, next) {
-	// TODO: Move to bluebird promise.map
-	// Sequlize may have a way to query multiple tables at once
 	User.findAll().then(function(users: User[]) {
 		EntityType.findAll().then(function(entityTypes: EntityType[]) {
 			EntityStateType.findAll().then(function(entityStateTypes: EntityStateType[]) {
@@ -41,6 +39,7 @@ router.get("/", function(req, res, next) {
 	});
 });
 
+// generates the necessary data from model for a form
 function createFormData(type: string, id?: number): Promise<any> {
 	var formData;
 
@@ -91,6 +90,7 @@ function createFormData(type: string, id?: number): Promise<any> {
 	return formData;
 }
 
+// generate form based on model type
 router.get("/new/:type/:id?", function(req, res, next) {
 	switch (req.params.type) {
 		case "entity":
@@ -110,6 +110,7 @@ router.get("/new/:type/:id?", function(req, res, next) {
 	}
 });
 
+// get model type, used for queries - cuts down on duplicate code
 function getDBClassFromType(type: string) {
 	switch (type) {
 		case "user":
@@ -131,6 +132,7 @@ function getDBClassFromType(type: string) {
 	}
 }
 
+// generate form and populate with existing model data
 router.get("/edit/:type/:id", function(req, res, next) {
 	var dbClass = getDBClassFromType(req.params.type);
 
@@ -138,7 +140,7 @@ router.get("/edit/:type/:id", function(req, res, next) {
 		res.redirect("/admin");
 		return;
 	}
-
+	// models are similar enough in sequlize so this query works for all of them
 	dbClass.findOne({
 		where: {
 			id: req.params.id
@@ -153,6 +155,7 @@ router.get("/edit/:type/:id", function(req, res, next) {
 	});
 });
 
+// translate post request into a database model
 function handleFormPost(type: string, data: any): Promise<any> {
 	var dbClass = getDBClassFromType(type);
 
@@ -240,6 +243,7 @@ function handleFormPost(type: string, data: any): Promise<any> {
 		return dbClass.update(dbData, {where: { id: data.id }});
 }
 
+// handle post request for new model
 router.post("/new/:type", function(req, res, next) {
 	req.body.id = undefined;
 	handleFormPost(req.params.type, req.body).then(function() {
@@ -249,6 +253,7 @@ router.post("/new/:type", function(req, res, next) {
 
 });
 
+// handle post request for updating existing model
 router.post("/edit/:type/:id", function(req, res, next) {
 	req.body.id = req.params.id;
 	handleFormPost(req.params.type, req.body).then(function() {

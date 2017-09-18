@@ -5,6 +5,9 @@ import ItemSlot from "./ItemSlot";
 @Table
 export default class Item extends Model<Item> {
 
+	// model for holding items
+	// picture id must match image name in images folder
+
 	@Column
 	public Name: string;
 	@Column

@@ -9,8 +9,8 @@ import {IFindOptions} from "sequelize-typescript";
 import {Sequelize} from "sequelize-typescript";
 
 let router = express.Router();
-let UserModel = new User();
 
+// passport module setup
 passport.serializeUser(function(user: User, done) {
 	done(null, user.id);
 });

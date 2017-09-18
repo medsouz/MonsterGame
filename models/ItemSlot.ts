@@ -6,6 +6,9 @@ import * as Promise from "bluebird";
 @Table
 export default class ItemSlot extends Model<ItemSlot> {
 
+	// model to determine which slots an item takes up on an entity
+	// e.g. hands/feet.
+
 	@Column
 	public Name: string;
 

@@ -4,6 +4,8 @@ import ItemInventory from "./ItemInventory";
 @Table
 export default class User extends Model<User> {
 
+	// model to hold user info, as well as hash password
+
 	public static hashPassword(password: string): string {
 		return require("crypto").pbkdf2Sync(password, "NaCL" /* TODO: Better salting */, 30000, 512, "sha512");
 	}

@@ -13,6 +13,9 @@ import * as Promise from "bluebird";
 @Table
 export default class Entity extends Model<Entity> {
 
+	// model to hold main entity information and logic for pulls from DB
+
+	// find entity by id and update states
 	public static findByIdAndUpdate(entityId: number) {
 		return Entity.findOne({where: {id: entityId}, include: Entity.getQueryInclude()}).then(function(e: Entity) {
 			return e.updateValues().then(function(values) {
@@ -24,12 +27,14 @@ export default class Entity extends Model<Entity> {
 		});
 	}
 
+	// get all entities for user - for display
 	public static findAllByUserId(userId: number) {
 		return Entity.findAll({where: {UserId: userId}, include: Entity.getQueryInclude()}).then(function(entities: Entity[]) {
 			return entities;
 		});
 	}
 
+	// entity relations required for update, used multiple times in other methods
 	public static getQueryInclude() {
 		return [
 			EntityType,
@@ -61,6 +66,7 @@ export default class Entity extends Model<Entity> {
 	@HasMany(() => ActiveItem)
 	public ActiveItems: ActiveItem[];
 
+	// changes states based on items and decay using Date.now() and last interaction
 	public updateValues(): Promise<any> {
 		var update = function(ActiveItems: ActiveItem[], EntityStateValues: EntityStateValue[]) {
 			var updates: any = {};
@@ -130,6 +136,7 @@ export default class Entity extends Model<Entity> {
 		return update(this.ActiveItems, this.EntityStateValues);
 	}
 
+	// entity name for display
 	public toString = (): string => {
 		return this.Name;
 	}

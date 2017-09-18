@@ -5,6 +5,8 @@ import Item from "./Item";
 @Table
 export default class ItemEffect extends Model<ItemEffect> {
 
+	// item effects, to connect items to entity states and define how much they change states
+
 	@Column
 	public EffectName: string;
 	@Column

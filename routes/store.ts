@@ -1,10 +1,10 @@
-// takes what we need from the express library and imports into this page
 import {Router} from "express";
 import Item from "../models/Item";
 import ItemInventory from "../models/ItemInventory";
 
 let router = Router();
 
+// check for logged in user
 router.use(function(req, res, next) {
 	if (req.user)
 		next();
@@ -12,6 +12,7 @@ router.use(function(req, res, next) {
 		res.redirect("/");
 });
 
+// show user's item inventory with counts, and "store" to add items from list of all available items
 router.get("/", function(req, res, next) {
 	Item.findAll().then(function(result: any[]) {
 		ItemInventory.findAll({where: {UserId: req.user.id}}).then(function(inventory: ItemInventory[]) {
@@ -27,6 +28,7 @@ router.get("/", function(req, res, next) {
 	});
 });
 
+// allow users to purchase items
 router.post("/purchase/:id", function(req, res, next) {
 	ItemInventory.findOne({where: {UserId: req.user.id, ItemId: req.params.id}}).then(function(inventory: ItemInventory) {
 		var query;

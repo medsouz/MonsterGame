@@ -1,4 +1,3 @@
-// takes what we need from the express library and imports into this page
 import {Router} from "express";
 import Entity from "../models/Entity";
 import EntityType from "../models/EntityType";
@@ -12,6 +11,7 @@ import ItemEffect from "../models/ItemEffect";
 
 let router = Router();
 
+// check for logged in user
 router.use(function(req, res, next) {
 	if (req.user)
 		next();
@@ -19,6 +19,7 @@ router.use(function(req, res, next) {
 		res.redirect("/");
 });
 
+// load entity based on id and update based on state changes
 router.get("/:id", function(req, res, next) {
 	Entity.findByIdAndUpdate(req.params.id).then(function(result) {
 		if (result.entity) {
@@ -31,6 +32,7 @@ router.get("/:id", function(req, res, next) {
 	});
 });
 
+// allow user to "interact" with entity on a time basis, prevent if not enough time has passed
 router.get("/:id/interact", function(req, res, next) {
 	Entity.findByIdAndUpdate(req.params.id).then(function(result) {
 		if (result.entity && (60000 - (Date.now() - result.entity.LastInteract.getTime()) < 0)) {
@@ -56,6 +58,7 @@ router.get("/:id/interact", function(req, res, next) {
 	});
 });
 
+// apply state changes to entity based on item effects and entity states related to item effects
 router.get("/:id/item/give/:itemID", function(req, res, next) {
 	Entity.findOne({where: {id: req.params.id, UserId: req.user.id}}).then(function(result: Entity) {
 		if (result) {
@@ -78,6 +81,7 @@ router.get("/:id/item/give/:itemID", function(req, res, next) {
 	});
 });
 
+// remove active item from entity to stop effects before time out
 router.get("/:id/item/remove/:activeItemID", function(req, res, next) {
 	Entity.findOne({where: {id: req.params.id, UserId: req.user.id}}).then(function(result: Entity) {
 		if (result) {

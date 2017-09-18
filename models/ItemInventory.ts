@@ -5,6 +5,8 @@ import User from "./User";
 @Table
 export default class ItemInventory extends Model<ItemInventory> {
 
+	// user's list of items
+
 	@ForeignKey(() => User)
 	@Column
 	public UserId: number;

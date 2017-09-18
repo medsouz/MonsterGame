@@ -1,4 +1,3 @@
-// takes what we need from the express library and imports into this page
 import {Router} from "express";
 
 import Entity from "../models/Entity";

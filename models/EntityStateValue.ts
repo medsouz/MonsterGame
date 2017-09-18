@@ -5,6 +5,8 @@ import Entity from "./Entity";
 @Table
 export default class EntityStateValue extends Model<EntityStateValue> {
 
+	// model to hold values for entity states per entity
+
 	@Column
 	public Value: number;
 	@Column
